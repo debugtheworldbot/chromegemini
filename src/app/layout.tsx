@@ -3,7 +3,7 @@ import "./globals.css";
 import Background from "@/components/background";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,20 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body className={inter.className}>
         <Background>{children}</Background>
-
-        <Script
-          id='ms_clarity'
-          dangerouslySetInnerHTML={{
-            __html: `(function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "mpra1dkc9i");`,
-          }}
-        />
+        <Analytics />
       </body>
     </html>
   );
