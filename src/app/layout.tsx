@@ -32,6 +32,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <Background>{children}</Background>
         <Analytics />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6794864725006505"
+          crossOrigin="anonymous"
+        ></script>
       </body>
     </html>
   );

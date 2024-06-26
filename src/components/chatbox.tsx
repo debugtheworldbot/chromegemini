@@ -51,28 +51,7 @@ export default function ChatBox() {
 
   return (
     <>
-      <div>
-        {isAI === null && <p>Checking your browser</p>}
-        {isAI !== null &&
-          (isAI ? (
-            <p className="text-sm font-medium leading-none">
-              Your chrome support Built-in AI. All code runs
-              <i className="font-bold"> locally </i>
-              on your computer. No internet. No API calls.
-            </p>
-          ) : (
-            <p>
-              Built-in AI not work. Please check{" "}
-              <a
-                href="https://github.com/lightning-joyce/chromeai?tab=readme-ov-file#how-to-set-up-built-in-gemini-nano-in-chrome"
-                className="font-medium text-primary underline underline-offset-4"
-              >
-                this steps
-              </a>{" "}
-              to turn on Built-in AI.
-            </p>
-          ))}
-      </div>
+      <div>{isAI === null && <p>Checking your browser</p>}</div>
 
       <div className="w-full flex-1 flex flex-col">
         <div id="chatbox" className="p-4 overflow-y-auto flex-1">
@@ -167,6 +146,27 @@ export default function ChatBox() {
             Send
           </Button>
         </form>
+        <div className="mt-4 text-gray-400">
+          {isAI !== null &&
+            (isAI ? (
+              <p className="text-sm font-medium leading-none">
+                Your chrome support Built-in AI. All code runs
+                <i className="font-bold"> locally </i>
+                on your computer. No internet. No API calls.
+              </p>
+            ) : (
+              <p>
+                Built-in AI not work. Please check{" "}
+                <a
+                  href="https://github.com/lightning-joyce/chromeai?tab=readme-ov-file#how-to-set-up-built-in-gemini-nano-in-chrome"
+                  className="font-medium text-primary underline underline-offset-4"
+                >
+                  this steps
+                </a>
+                to turn on Built-in AI.
+              </p>
+            ))}
+        </div>
       </div>
     </>
   );
