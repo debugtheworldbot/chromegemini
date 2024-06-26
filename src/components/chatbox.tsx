@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Markdown from "react-markdown";
 
 import { useRef } from "react";
 import { Button } from "./ui/button";
@@ -79,9 +80,9 @@ export default function ChatBox() {
             if (chat.role === "user") {
               return (
                 <div className="mb-2 text-right" key={chat.id}>
-                  <p className="bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">
-                    {chat.text}
-                  </p>
+                  <div className="prose bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">
+                    <Markdown>{chat.text}</Markdown>
+                  </div>
                 </div>
               );
             } else {
@@ -94,9 +95,9 @@ export default function ChatBox() {
                   }}
                 >
                   {chat.text ? (
-                    <p className="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">
-                      {chat.text}
-                    </p>
+                    <div className="prose bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">
+                      <Markdown>{chat.text}</Markdown>
+                    </div>
                   ) : (
                     <p>loading...</p>
                   )}
