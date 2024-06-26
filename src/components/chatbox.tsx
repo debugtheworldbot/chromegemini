@@ -156,10 +156,10 @@ export default function ChatBox() {
               </p>
             ) : (
               <p>
-                Built-in AI not work. Please check{" "}
+                Built-in AI not work. Please check
                 <a
                   href="https://github.com/debugtheworldbot/chromegemini?tab=readme-ov-file#how-to-set-up-built-in-gemini-nano-in-chrome"
-                  className="font-medium text-primary underline underline-offset-4"
+                  className="font-medium text-primary underline underline-offset-4 mx-2"
                 >
                   this steps
                 </a>
