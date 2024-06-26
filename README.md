@@ -21,9 +21,10 @@ Chrome AI is a demo project that runs large language models locally within the b
 1. **Install Chrome Canary**: Ensure you have version 127. [Download Chrome Canary](https://google.com/chrome/canary/).
 2. **Enable Prompt API**: Open `chrome://flags/#prompt-api-for-gemini-nano`, set it to "Enabled".
 3. **Enable Optimization Guide**: Open `chrome://flags/#optimization-guide-on-device-model`, set it to "Enabled BypassPerfRequirement". Restart the browser.
-4. **Download Model**: Go to `chrome://components/`, find "Optimization Guide On Device Model", ensure it’s fully downloaded. If the version is "0.0.0.0", click "Check for update".
-5. **Troubleshoot**: If the "Optimization Guide On Device Model" is not displayed, disable the settings in steps 2 and 3, restart your browser and re-enable it.
-6. **Verify Setup**: Open a webpage, press F12, and check `window.ai` in the console.
+4. **Login to Google**: Make sure you are logged in to Chrome. For now, Incognito and Guest mode are not supported.
+5. **Download Model**: Go to `chrome://components/`, find "Optimization Guide On Device Model", ensure it’s fully downloaded. If the version is "0.0.0.0", click "Check for update".
+6. **Troubleshoot**: If the "Optimization Guide On Device Model" is not displayed, disable the settings in steps 2 and 3, restart your browser and re-enable it.
+7. **Verify Setup**: Open a webpage, press F12, and check `window.ai` in the console.
 
 **Test Code**:
 
@@ -37,7 +38,7 @@ await model.prompt("Who are you?");
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/chromeai.git
+git clone git@github.com:debugtheworldbot/chromegemini.git
 cd chromeai
 pnpm i
 pnpm dev
