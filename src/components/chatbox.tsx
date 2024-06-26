@@ -55,8 +55,9 @@ export default function ChatBox() {
         {isAI !== null &&
           (isAI ? (
             <p className="text-sm font-medium leading-none">
-              Your chrome support Built-in AI. All code runs locally on your
-              computer. No internet.
+              Your chrome support Built-in AI. All code runs
+              <i className="font-bold"> locally </i>
+              on your computer. No internet. No API calls.
             </p>
           ) : (
             <p>
@@ -72,8 +73,8 @@ export default function ChatBox() {
           ))}
       </div>
 
-      <div className="w-full">
-        <div id="chatbox" className="p-4 h-[40vh] overflow-y-auto">
+      <div className="w-full flex-1 flex flex-col">
+        <div id="chatbox" className="p-4 overflow-y-auto flex-1">
           {chatHistory.map((chat) => {
             if (chat.role === "user") {
               return (
@@ -92,16 +93,20 @@ export default function ChatBox() {
                     setEndMessage(el);
                   }}
                 >
-                  <p className="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">
-                    {chat.text}
-                  </p>
+                  {chat.text ? (
+                    <p className="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">
+                      {chat.text}
+                    </p>
+                  ) : (
+                    <p>loading...</p>
+                  )}
                 </div>
               );
             }
           })}
         </div>
         <form
-          className="flex w-full items-center space-x-2"
+          className="flex w-full items-center space-x-2 mt-auto"
           onSubmit={async (form) => {
             form.preventDefault();
             if (inputValue === "") {
@@ -161,30 +166,6 @@ export default function ChatBox() {
             Send
           </Button>
         </form>
-
-        <div className="mt-10">
-          <p className="text-center">
-            Made by{" "}
-            <a
-              href="https://twitter.com/lightning_joyce"
-              target="_blank"
-              className="font-medium text-primary underline underline-offset-4"
-            >
-              Lightning Joyce
-            </a>
-          </p>
-          <p className="text-center">
-            Open source on{" "}
-            <a
-              href="https://github.com/lightning-joyce/chromeai"
-              target="_blank"
-              className="font-medium text-primary underline underline-offset-4"
-            >
-              GitHub
-            </a>
-            .
-          </p>
-        </div>
       </div>
     </>
   );
