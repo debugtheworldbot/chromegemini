@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+import { useRef } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { useRef } from "react";
 
 declare global {
   interface Window {
@@ -24,9 +24,7 @@ const checkAI = async () => {
 export default function ChatBox() {
   const rawChatHistory = useRef<any[]>([]);
   const [endMessage, setEndMessage] = useState<null | HTMLDivElement>(null);
-  const [model, setModel] = useState({
-    prompt: async (inputValue?: string) => {},
-  });
+  const [model, setModel] = useState<{ prompt: any; promptStreaming: any }>();
   const [isAI, setIsAI] = useState<null | boolean>(null);
   const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useState(rawChatHistory.current);
@@ -56,7 +54,7 @@ export default function ChatBox() {
         {isAI === null && <p>Checking your browser</p>}
         {isAI !== null &&
           (isAI ? (
-            <p className='text-sm font-medium leading-none'>
+            <p className="text-sm font-medium leading-none">
               Your chrome support Built-in AI. All code runs locally on your
               computer. No internet.
             </p>
@@ -64,8 +62,8 @@ export default function ChatBox() {
             <p>
               Built-in AI not work. Please check{" "}
               <a
-                href='https://github.com/lightning-joyce/chromeai?tab=readme-ov-file#how-to-set-up-built-in-gemini-nano-in-chrome'
-                className='font-medium text-primary underline underline-offset-4'
+                href="https://github.com/lightning-joyce/chromeai?tab=readme-ov-file#how-to-set-up-built-in-gemini-nano-in-chrome"
+                className="font-medium text-primary underline underline-offset-4"
               >
                 this steps
               </a>{" "}
@@ -74,13 +72,13 @@ export default function ChatBox() {
           ))}
       </div>
 
-      <div className='w-full'>
-        <div id='chatbox' className='p-4 h-[40vh] overflow-y-auto'>
+      <div className="w-full">
+        <div id="chatbox" className="p-4 h-[40vh] overflow-y-auto">
           {chatHistory.map((chat) => {
             if (chat.role === "user") {
               return (
-                <div className='mb-2 text-right' key={chat.id}>
-                  <p className='bg-blue-500 text-white rounded-lg py-2 px-4 inline-block'>
+                <div className="mb-2 text-right" key={chat.id}>
+                  <p className="bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">
                     {chat.text}
                   </p>
                 </div>
@@ -88,13 +86,13 @@ export default function ChatBox() {
             } else {
               return (
                 <div
-                  className='mb-2'
+                  className="mb-2"
                   key={chat.id}
                   ref={(el) => {
                     setEndMessage(el);
                   }}
                 >
-                  <p className='bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block'>
+                  <p className="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">
                     {chat.text}
                   </p>
                 </div>
@@ -103,31 +101,41 @@ export default function ChatBox() {
           })}
         </div>
         <form
-          className='flex w-full items-center space-x-2'
+          className="flex w-full items-center space-x-2"
           onSubmit={async (form) => {
             form.preventDefault();
             if (inputValue === "") {
               return;
             }
-            rawChatHistory.current.push({
-              id: rawChatHistory.current.length + 1,
+            const id = rawChatHistory.current.length + 1;
+            const input = {
+              id,
               role: "user",
               text: inputValue,
-            });
-            setChatHistory(rawChatHistory.current);
+            };
+            const res = {
+              id: id + 1,
+              role: "assistant",
+              text: "",
+            };
 
+            rawChatHistory.current.push(input);
             const prompt = `${rawChatHistory.current.map((chat) => {
               return `${chat.role}: ${chat.text}\n`;
             })}\nassistant:`;
-            const aiReplay = await model.prompt(prompt);
-
-            rawChatHistory.current.push({
-              id: rawChatHistory.current.length + 1,
-              role: "assistant",
-              text: aiReplay,
-            });
-            setChatHistory(rawChatHistory.current);
+            rawChatHistory.current.push(res);
+            console.log("submit", prompt);
+            const aiReplayStream = await model?.promptStreaming(prompt);
             setInputValue("");
+            setChatHistory(rawChatHistory.current);
+            for await (const chunk of aiReplayStream) {
+              res.text = chunk;
+              setChatHistory((h) => {
+                h[h.length - 1].text = chunk;
+                console.log(chunk);
+                return [...h];
+              });
+            }
           }}
           onReset={() => {
             rawChatHistory.current = [];
@@ -135,12 +143,12 @@ export default function ChatBox() {
             setInputValue("");
           }}
         >
-          <Button type='reset' disabled={!isAI}>
+          <Button type="reset" disabled={!isAI}>
             New Chat
           </Button>
           <Input
-            placeholder='Type here'
-            name='text'
+            placeholder="Type here"
+            name="text"
             value={inputValue}
             onInput={(e) => {
               if ("value" in e.target) {
@@ -149,28 +157,28 @@ export default function ChatBox() {
             }}
             disabled={!isAI}
           />
-          <Button type='submit' disabled={!isAI}>
+          <Button type="submit" disabled={!isAI}>
             Send
           </Button>
         </form>
 
-        <div className='mt-10'>
-          <p className='text-center'>
+        <div className="mt-10">
+          <p className="text-center">
             Made by{" "}
             <a
-              href='https://twitter.com/lightning_joyce'
-              target='_blank'
-              className='font-medium text-primary underline underline-offset-4'
+              href="https://twitter.com/lightning_joyce"
+              target="_blank"
+              className="font-medium text-primary underline underline-offset-4"
             >
               Lightning Joyce
             </a>
           </p>
-          <p className='text-center'>
+          <p className="text-center">
             Open source on{" "}
             <a
-              href='https://github.com/lightning-joyce/chromeai'
-              target='_blank'
-              className='font-medium text-primary underline underline-offset-4'
+              href="https://github.com/lightning-joyce/chromeai"
+              target="_blank"
+              className="font-medium text-primary underline underline-offset-4"
             >
               GitHub
             </a>
