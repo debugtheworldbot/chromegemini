@@ -6,17 +6,13 @@ import Markdown from "react-markdown";
 import { useRef } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { ChatHistory, historyAtom } from "@/lib/store";
+import { useSetAtom } from "jotai";
 
 declare global {
   interface Window {
     ai: any;
   }
-}
-
-interface ChatHistory {
-  id: number;
-  role: "user" | "assistant";
-  text: string;
 }
 
 const checkAI = async () => {
@@ -30,6 +26,7 @@ const checkAI = async () => {
 
 export default function ChatBox() {
   const rawChatHistory = useRef<ChatHistory[]>([]);
+  const saveChatHistory = useSetAtom(historyAtom);
   const [endMessage, setEndMessage] = useState<null | HTMLDivElement>(null);
   const [model, setModel] = useState<{ prompt: any; promptStreaming: any }>();
   const [isAI, setIsAI] = useState<null | boolean>(null);
@@ -54,6 +51,19 @@ export default function ChatBox() {
   useEffect(() => {
     endMessage?.scrollIntoView({ behavior: "smooth" });
   }, [endMessage]);
+
+  const onReset = () => {
+    saveChatHistory((h) => [
+      ...h,
+      {
+        createdAt: new Date().toISOString(),
+        chatHistory: rawChatHistory.current,
+      },
+    ]);
+    rawChatHistory.current = [];
+    setChatHistory([]);
+    setInputValue("");
+  };
 
   return (
     <>
@@ -128,11 +138,7 @@ export default function ChatBox() {
               });
             }
           }}
-          onReset={() => {
-            rawChatHistory.current = [];
-            setChatHistory([]);
-            setInputValue("");
-          }}
+          onReset={onReset}
         >
           <Button type="reset" disabled={!isAI}>
             New Chat

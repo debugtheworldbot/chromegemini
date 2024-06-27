@@ -1,23 +1,17 @@
+"use client";
 import React from "react";
 import { Button } from "./ui/button";
+import { useAtomValue } from "jotai";
+import { historyAtom } from "@/lib/store";
 
-const history = [
-  {
-    name: "History 1",
-    description: "Description 1",
-  },
-  {
-    name: "History 2",
-    description: "Description 2",
-  },
-];
 export default function Aside() {
+  const chatHistory = useAtomValue(historyAtom);
   return (
-    <div className="w-60 h-screen border-r">
-      {history.map((item) => (
-        <div key={item.name}>
-          <Button variant="ghost" className="text-xl w-full">
-            {item.name}
+    <div className="w-60 h-screen border-r px-1">
+      {chatHistory.map((item, index) => (
+        <div key={index}>
+          <Button variant="ghost" className="justify-start w-full ">
+            <span className="truncate">{item.chatHistory[0].text}</span>
           </Button>
         </div>
       ))}
