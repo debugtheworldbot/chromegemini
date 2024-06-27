@@ -1,9 +1,9 @@
 import "./globals.css";
-
 import Background from "@/components/background";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +37,7 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6794864725006505"
           crossOrigin="anonymous"
         ></script>
+        <GoogleAnalytics gaId="G-B7E1N121PK" />
       </body>
     </html>
   );
