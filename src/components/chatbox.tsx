@@ -13,6 +13,12 @@ declare global {
   }
 }
 
+interface ChatHistory {
+  id: number;
+  role: "user" | "assistant";
+  text: string;
+}
+
 const checkAI = async () => {
   if ("ai" in window) {
     if ((await window.ai.canCreateTextSession()) === "readily") {
@@ -23,7 +29,7 @@ const checkAI = async () => {
 };
 
 export default function ChatBox() {
-  const rawChatHistory = useRef<any[]>([]);
+  const rawChatHistory = useRef<ChatHistory[]>([]);
   const [endMessage, setEndMessage] = useState<null | HTMLDivElement>(null);
   const [model, setModel] = useState<{ prompt: any; promptStreaming: any }>();
   const [isAI, setIsAI] = useState<null | boolean>(null);
@@ -93,12 +99,12 @@ export default function ChatBox() {
               return;
             }
             const id = rawChatHistory.current.length + 1;
-            const input = {
+            const input: ChatHistory = {
               id,
               role: "user",
               text: inputValue,
             };
-            const res = {
+            const res: ChatHistory = {
               id: id + 1,
               role: "assistant",
               text: "",
@@ -150,20 +156,19 @@ export default function ChatBox() {
           {isAI !== null &&
             (isAI ? (
               <p className="text-sm font-medium leading-none">
-                Your chrome support Built-in AI. All code runs
-                <i className="font-bold"> locally </i>
-                on your computer. No internet. No API calls.
+                ✅ Your chrome support Built-in AI. Your messages stay on your
+                computer, everything is kept private and local.
               </p>
             ) : (
               <p>
-                Built-in AI not work. Please check
+                ❌ Oops! Local AI isn&#39;t working right now. Check out our
                 <a
                   href="https://github.com/debugtheworldbot/chromegemini?tab=readme-ov-file#how-to-set-up-built-in-gemini-nano-in-chrome"
                   className="font-medium text-primary underline underline-offset-4 mx-2"
                 >
-                  this steps
+                  quick setup guide
                 </a>
-                to turn on Built-in AI.
+                to get it running
               </p>
             ))}
         </div>
