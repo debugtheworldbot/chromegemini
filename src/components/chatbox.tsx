@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ChatHistory, currentChatAtom, historyAtom } from "@/lib/store";
 import { useAtom } from "jotai";
+import Link from "next/link";
 
 declare global {
   interface Window {
@@ -69,41 +70,44 @@ export default function ChatBox() {
   };
 
   return (
-    <>
-      <div>{isAI === null && <p>Checking your browser</p>}</div>
-
-      <div className="w-full flex-1 flex flex-col">
-        <div id="chatbox" className="p-4 overflow-y-auto flex-1">
-          {chatHistory.map((chat) => {
-            if (chat.role === "user") {
-              return (
-                <div className="mb-2 text-right" key={chat.id}>
-                  <div className="prose bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">
+    <div className="w-full flex-1 flex flex-col">
+      <div>
+        {isAI === null && (
+          <p className="text-lg font-medium">Checking your browser...</p>
+        )}
+      </div>
+      <div id="chatbox" className="p-4 overflow-y-auto flex-1">
+        {chatHistory.map((chat) => {
+          if (chat.role === "user") {
+            return (
+              <div className="mb-2 text-right" key={chat.id}>
+                <div className="prose bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">
+                  <Markdown>{chat.text}</Markdown>
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <div
+                className="mb-2"
+                key={chat.id}
+                ref={(el) => {
+                  setEndMessage(el);
+                }}
+              >
+                {chat.text ? (
+                  <div className="prose bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">
                     <Markdown>{chat.text}</Markdown>
                   </div>
-                </div>
-              );
-            } else {
-              return (
-                <div
-                  className="mb-2"
-                  key={chat.id}
-                  ref={(el) => {
-                    setEndMessage(el);
-                  }}
-                >
-                  {chat.text ? (
-                    <div className="prose bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">
-                      <Markdown>{chat.text}</Markdown>
-                    </div>
-                  ) : (
-                    <p>loading...</p>
-                  )}
-                </div>
-              );
-            }
-          })}
-        </div>
+                ) : (
+                  <p>loading...</p>
+                )}
+              </div>
+            );
+          }
+        })}
+      </div>
+      {isAI !== null && (
         <form
           className="flex w-full items-center space-x-2 mt-auto"
           onSubmit={async (form) => {
@@ -151,6 +155,7 @@ export default function ChatBox() {
           <Input
             placeholder="Type here"
             name="text"
+            className="w-full"
             value={inputValue}
             onInput={(e) => {
               if ("value" in e.target) {
@@ -163,27 +168,27 @@ export default function ChatBox() {
             Send
           </Button>
         </form>
-        <div className="mt-4 text-gray-400 text-center">
-          {isAI !== null &&
-            (isAI ? (
-              <p className="text-sm font-medium leading-none">
-                ✅ Your chrome support Built-in AI. Your messages stay on your
-                computer, everything is kept private and local.
-              </p>
-            ) : (
-              <p>
-                ❌ Oops! Local AI isn&#39;t working right now. Check out our
-                <a
-                  href="https://github.com/debugtheworldbot/chromegemini?tab=readme-ov-file#how-to-set-up-built-in-gemini-nano-in-chrome"
-                  className="font-medium text-primary underline underline-offset-4 mx-2"
-                >
-                  quick setup guide
-                </a>
-                to get it running
-              </p>
-            ))}
-        </div>
+      )}
+      <div className="mt-4 text-gray-400 text-center">
+        {isAI !== null &&
+          (isAI ? (
+            <p className="text-sm font-medium leading-none">
+              ✅ Your chrome support Built-in AI. Your messages stay on your
+              computer, everything is kept private and local.
+            </p>
+          ) : (
+            <p>
+              ❌ Oops! Local AI isn&#39;t working right now. Check out our
+              <Link
+                href="/help"
+                className="font-medium text-primary underline underline-offset-4 mx-2"
+              >
+                quick setup guide
+              </Link>
+              to get it running
+            </p>
+          ))}
       </div>
-    </>
+    </div>
   );
 }

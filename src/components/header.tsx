@@ -8,7 +8,7 @@ export default function Header() {
     <div className="flex justify-between">
       <div className="flex min-w-0 flex-col gap-1">
         <h1 className="font-cal text-3xl flex gap-4">
-          Chrome AI Test Page
+          ChromeAI.org
           <Badge className="leading-5 self-center">Gemini Nano</Badge>
         </h1>
         <div className="flex gap-4">
