@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="sticky py-4 top-0 bg-white flex justify-between">
+    <div className="sticky py-4 top-0 bg-white/50 backdrop-blur flex justify-between">
       <div className="flex min-w-0 flex-col gap-1 lg:ml-20">
         <h1 className="font-cal text-3xl flex gap-4">
           ChromeAI.org

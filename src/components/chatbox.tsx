@@ -107,7 +107,7 @@ export default function ChatBox() {
           }
         })}
       </div>
-      <footer className="sticky bottom-0 bg-white pt-2">
+      <footer className="sticky bottom-0 bg-white/50 backdrop-blur pt-2">
         {isAI !== null && (
           <form
             className=" flex w-full items-center space-x-2 mt-auto"
