@@ -107,88 +107,90 @@ export default function ChatBox() {
           }
         })}
       </div>
-      {isAI !== null && (
-        <form
-          className="flex w-full items-center space-x-2 mt-auto"
-          onSubmit={async (form) => {
-            form.preventDefault();
-            if (inputValue === "") {
-              return;
-            }
-            const id = chatHistory.length + 1;
-            const input: ChatHistory = {
-              id,
-              role: "user",
-              text: inputValue,
-              createdAt: new Date().toISOString(),
-            };
-            const res: ChatHistory = {
-              id: id + 1,
-              role: "assistant",
-              text: "",
-              createdAt: new Date().toISOString(),
-            };
+      <footer className="sticky bottom-0 bg-white pt-2">
+        {isAI !== null && (
+          <form
+            className=" flex w-full items-center space-x-2 mt-auto"
+            onSubmit={async (form) => {
+              form.preventDefault();
+              if (inputValue === "") {
+                return;
+              }
+              const id = chatHistory.length + 1;
+              const input: ChatHistory = {
+                id,
+                role: "user",
+                text: inputValue,
+                createdAt: new Date().toISOString(),
+              };
+              const res: ChatHistory = {
+                id: id + 1,
+                role: "assistant",
+                text: "",
+                createdAt: new Date().toISOString(),
+              };
 
-            chatHistory.push(input);
-            const prompt = `${chatHistory.map((chat) => {
-              return `${chat.role}: ${chat.text}\n`;
-            })}\nassistant:`;
-            chatHistory.push(res);
-            console.log("submit", prompt);
-            const aiReplayStream = await model?.promptStreaming(prompt);
-            setInputValue("");
-            setChatHistory(chatHistory);
-            for await (const chunk of aiReplayStream) {
-              res.text = chunk;
-              setChatHistory((h) => {
-                h[h.length - 1].text = chunk;
-                console.log(chunk);
-                return [...h];
-              });
-            }
-          }}
-          onReset={onReset}
-        >
-          <Button type="reset" disabled={!isAI}>
-            New Chat
-          </Button>
-          <Input
-            placeholder="Type here"
-            name="text"
-            className="w-full"
-            value={inputValue}
-            onInput={(e) => {
-              if ("value" in e.target) {
-                setInputValue(e.target.value as string);
+              chatHistory.push(input);
+              const prompt = `${chatHistory.map((chat) => {
+                return `${chat.role}: ${chat.text}\n`;
+              })}\nassistant:`;
+              chatHistory.push(res);
+              console.log("submit", prompt);
+              const aiReplayStream = await model?.promptStreaming(prompt);
+              setInputValue("");
+              setChatHistory(chatHistory);
+              for await (const chunk of aiReplayStream) {
+                res.text = chunk;
+                setChatHistory((h) => {
+                  h[h.length - 1].text = chunk;
+                  console.log(chunk);
+                  return [...h];
+                });
               }
             }}
-            disabled={!isAI}
-          />
-          <Button type="submit" disabled={!isAI}>
-            Send
-          </Button>
-        </form>
-      )}
-      <div className="mt-4 text-gray-400 text-center">
-        {isAI !== null &&
-          (isAI ? (
-            <p className="text-sm font-medium leading-none">
-              ✅ Your chrome support Built-in AI. Your messages stay on your
-              computer, everything is kept private and local.
-            </p>
-          ) : (
-            <p>
-              ❌ Oops! Local AI isn&#39;t working right now. Check out our
-              <Link
-                href="/help"
-                className="font-medium text-primary underline underline-offset-4 mx-2"
-              >
-                quick setup guide
-              </Link>
-              to get it running
-            </p>
-          ))}
-      </div>
+            onReset={onReset}
+          >
+            <Button type="reset" disabled={!isAI}>
+              New Chat
+            </Button>
+            <Input
+              placeholder="Chat to Chrome on-device AI locally, no internet connected."
+              name="text"
+              className="w-full"
+              value={inputValue}
+              onInput={(e) => {
+                if ("value" in e.target) {
+                  setInputValue(e.target.value as string);
+                }
+              }}
+              disabled={!isAI}
+            />
+            <Button type="submit" disabled={!isAI}>
+              Send
+            </Button>
+          </form>
+        )}
+        <div className="my-4 text-gray-400 text-center">
+          {isAI !== null &&
+            (isAI ? (
+              <p className="text-sm font-medium leading-none">
+                ✅ Your chrome support Built-in AI. Your messages stay on your
+                computer, everything is kept private and local.
+              </p>
+            ) : (
+              <p>
+                ❌ Oops! Local AI isn&#39;t working right now. Check out our
+                <Link
+                  href="/help"
+                  className="font-medium text-primary underline underline-offset-4 mx-2"
+                >
+                  quick setup guide
+                </Link>
+                to get it running
+              </p>
+            ))}
+        </div>
+      </footer>
     </div>
   );
 }

@@ -9,7 +9,7 @@ export default function SideTrigger() {
   return (
     <Button
       onClick={() => setVisible((v) => !v)}
-      className="fixed top-5 left-0 z-10"
+      className="fixed top-5 left-2 z-10"
       variant="ghost"
     >
       {hideIcon}
