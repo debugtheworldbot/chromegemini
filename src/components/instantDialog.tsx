@@ -12,14 +12,16 @@ import { Input } from "./ui/input";
 import Markdown from "react-markdown";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { useCheckAI } from "@/hooks/use-check-ai";
 
 export default function InstantDialog() {
   const [output, setOutput] = useState("");
   const [time, setTime] = useState(0);
+  const { isAI, model } = useCheckAI();
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Instant Mode</Button>
+        <Button disabled={!isAI}>Instant Mode</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -32,7 +34,6 @@ export default function InstantDialog() {
         <Input
           onInput={async (e) => {
             const prompt = e.currentTarget.value;
-            const model = await window.ai.createTextSession();
             const startTime = performance.now();
             const res = await model?.prompt(prompt);
             setTime(performance.now() - startTime);

@@ -7,6 +7,7 @@ import { Input } from "./ui/input";
 import { ChatHistory, currentChatAtom, historyAtom } from "@/lib/store";
 import { useAtom } from "jotai";
 import Link from "next/link";
+import { useCheckAI } from "@/hooks/use-check-ai";
 
 declare global {
   interface Window {
@@ -14,37 +15,13 @@ declare global {
   }
 }
 
-const checkAI = async () => {
-  if ("ai" in window) {
-    if ((await window.ai.canCreateTextSession()) === "readily") {
-      return true;
-    }
-  }
-  return false;
-};
-
 export default function ChatBox() {
   const [fullHistory, saveChatHistory] = useAtom(historyAtom);
   const [endMessage, setEndMessage] = useState<null | HTMLDivElement>(null);
-  const [model, setModel] = useState<{ prompt: any; promptStreaming: any }>();
-  const [isAI, setIsAI] = useState<null | boolean>(null);
   const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useAtom(currentChatAtom);
 
-  const updateIsAI = async () => {
-    const checkAIStatus = await checkAI();
-
-    if (checkAIStatus) {
-      const thisModel = await window.ai.createTextSession();
-      setModel(thisModel);
-    }
-
-    setIsAI(checkAIStatus);
-  };
-
-  useEffect(() => {
-    updateIsAI();
-  }, []);
+  const { isAI, model } = useCheckAI();
 
   useEffect(() => {
     endMessage?.scrollIntoView({ behavior: "smooth" });
