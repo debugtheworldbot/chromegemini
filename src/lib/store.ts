@@ -17,3 +17,5 @@ export const currentChatAtom = atomWithStorage<ChatHistory[]>(
   "CurrentChat",
   [],
 );
+
+export const sideTriggerAtom = atomWithStorage<boolean>("SideTrigger", true);

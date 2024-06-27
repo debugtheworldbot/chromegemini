@@ -163,7 +163,7 @@ export default function ChatBox() {
             Send
           </Button>
         </form>
-        <div className="mt-4 text-gray-400">
+        <div className="mt-4 text-gray-400 text-center">
           {isAI !== null &&
             (isAI ? (
               <p className="text-sm font-medium leading-none">
