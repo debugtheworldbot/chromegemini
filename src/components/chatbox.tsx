@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
-
-import { useRef } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { ChatHistory, historyAtom } from "@/lib/store";
-import { useSetAtom } from "jotai";
+import { ChatHistory, currentChatAtom, historyAtom } from "@/lib/store";
+import { useAtom } from "jotai";
 
 declare global {
   interface Window {
@@ -25,13 +23,12 @@ const checkAI = async () => {
 };
 
 export default function ChatBox() {
-  const rawChatHistory = useRef<ChatHistory[]>([]);
-  const saveChatHistory = useSetAtom(historyAtom);
+  const [fullHistory, saveChatHistory] = useAtom(historyAtom);
   const [endMessage, setEndMessage] = useState<null | HTMLDivElement>(null);
   const [model, setModel] = useState<{ prompt: any; promptStreaming: any }>();
   const [isAI, setIsAI] = useState<null | boolean>(null);
   const [inputValue, setInputValue] = useState("");
-  const [chatHistory, setChatHistory] = useState(rawChatHistory.current);
+  const [chatHistory, setChatHistory] = useAtom(currentChatAtom);
 
   const updateIsAI = async () => {
     const checkAIStatus = await checkAI();
@@ -53,14 +50,20 @@ export default function ChatBox() {
   }, [endMessage]);
 
   const onReset = () => {
-    saveChatHistory((h) => [
-      ...h,
-      {
-        createdAt: new Date().toISOString(),
-        chatHistory: rawChatHistory.current,
-      },
-    ]);
-    rawChatHistory.current = [];
+    if (
+      chatHistory.length &&
+      !fullHistory.find(
+        (h) => h.id === chatHistory[chatHistory.length - 1].createdAt,
+      )
+    ) {
+      saveChatHistory((h) => [
+        ...h,
+        {
+          id: chatHistory[chatHistory.length - 1].createdAt,
+          chatHistory: chatHistory,
+        },
+      ]);
+    }
     setChatHistory([]);
     setInputValue("");
   };
@@ -108,27 +111,29 @@ export default function ChatBox() {
             if (inputValue === "") {
               return;
             }
-            const id = rawChatHistory.current.length + 1;
+            const id = chatHistory.length + 1;
             const input: ChatHistory = {
               id,
               role: "user",
               text: inputValue,
+              createdAt: new Date().toISOString(),
             };
             const res: ChatHistory = {
               id: id + 1,
               role: "assistant",
               text: "",
+              createdAt: new Date().toISOString(),
             };
 
-            rawChatHistory.current.push(input);
-            const prompt = `${rawChatHistory.current.map((chat) => {
+            chatHistory.push(input);
+            const prompt = `${chatHistory.map((chat) => {
               return `${chat.role}: ${chat.text}\n`;
             })}\nassistant:`;
-            rawChatHistory.current.push(res);
+            chatHistory.push(res);
             console.log("submit", prompt);
             const aiReplayStream = await model?.promptStreaming(prompt);
             setInputValue("");
-            setChatHistory(rawChatHistory.current);
+            setChatHistory(chatHistory);
             for await (const chunk of aiReplayStream) {
               res.text = chunk;
               setChatHistory((h) => {

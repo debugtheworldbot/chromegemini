@@ -4,10 +4,16 @@ export interface ChatHistory {
   id: number;
   role: "user" | "assistant";
   text: string;
+  createdAt: string;
 }
 export const historyAtom = atomWithStorage<
   {
-    createdAt: string;
+    id: string;
     chatHistory: ChatHistory[];
   }[]
 >("ChatHistory", []);
+
+export const currentChatAtom = atomWithStorage<ChatHistory[]>(
+  "CurrentChat",
+  [],
+);
