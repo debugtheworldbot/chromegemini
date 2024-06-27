@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -17,12 +18,7 @@ export default function Header() {
         </div>
       </div>
       <Button variant="secondary" className="my-auto rounded-full">
-        <a
-          target="_blank"
-          href="https://github.com/debugtheworldbot/chromegemini?tab=readme-ov-file#how-to-set-up-built-in-gemini-nano-in-chrome"
-        >
-          HELP & INTRODUCTION
-        </a>
+        <Link href="/help">HELP & INTRODUCTION</Link>
       </Button>
     </div>
   );
