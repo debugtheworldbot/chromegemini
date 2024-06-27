@@ -2,6 +2,7 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import InstantDialog from "./instantDialog";
 
 export default function Header() {
   return (
@@ -17,9 +18,12 @@ export default function Header() {
           </span>
         </div>
       </div>
-      <Button variant="secondary" className="my-auto rounded-full">
-        <Link href="/help">HELP & INTRODUCTION</Link>
-      </Button>
+      <div className="flex gap-4 items-center">
+        <InstantDialog />
+        <Button variant="secondary" className="my-auto rounded-full">
+          <Link href="/help">HELP & INTRODUCTION</Link>
+        </Button>
+      </div>
     </div>
   );
 }
