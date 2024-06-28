@@ -9,6 +9,7 @@ import { useAtom } from "jotai";
 import Link from "next/link";
 import { useCheckAI } from "@/hooks/use-check-ai";
 import { Loader } from "lucide-react";
+import { Modal } from "./modal";
 
 declare global {
   interface Window {
@@ -22,7 +23,7 @@ export default function ChatBox() {
   const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useAtom(currentChatAtom);
 
-  const { isAI, model } = useCheckAI();
+  const { isAI, model, error } = useCheckAI();
 
   useEffect(() => {
     endMessage?.scrollIntoView({ behavior: "smooth" });
@@ -49,10 +50,13 @@ export default function ChatBox() {
 
   return (
     <div className="w-full flex-1 flex flex-col">
+      {error && <Modal error={error} />}
       {!isAI && (
         <div className="text-center mt-6">
           {isAI === null && (
-            <p className="text-lg font-medium">Checking your browser...</p>
+            <p className="text-lg font-medium flex items-center">
+              <Loader className="animate-spin mr-2" /> Checking your browser...
+            </p>
           )}
           {isAI === false && (
             <p className="text-lg font-medium">

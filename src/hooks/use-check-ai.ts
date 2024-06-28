@@ -1,28 +1,32 @@
+import { checkEnv } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 const checkAI = async () => {
-  if ("ai" in window) {
-    if ((await window.ai.canCreateTextSession()) === "readily") {
-      return true;
-    }
-  }
-  return false;
+  await checkEnv();
+  return true;
 };
 export const useCheckAI = () => {
   const [isAI, setIsAI] = useState<null | boolean>(null);
   const [model, setModel] = useState<{ prompt: any; promptStreaming: any }>();
+  const [error, setError] = useState<null | string>(null);
   const updateIsAI = async () => {
-    const checkAIStatus = await checkAI();
-    if (checkAIStatus) {
-      const thisModel = await window.ai.createTextSession();
-      setModel(thisModel);
-    }
+    try {
+      const checkAIStatus = await checkAI();
+      if (checkAIStatus) {
+        const thisModel = await window.ai.createTextSession();
+        setModel(thisModel);
+      }
 
-    setIsAI(checkAIStatus);
+      setIsAI(checkAIStatus);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e?.message);
+      }
+    }
   };
 
   useEffect(() => {
     updateIsAI();
   }, []);
-  return { isAI, model };
+  return { isAI, model, error };
 };
