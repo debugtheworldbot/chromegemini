@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { ChatHistory, currentChatAtom, historyAtom } from "@/lib/store";
+import { Chat, currentChatAtom, historyAtom } from "@/lib/store";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { useCheckAI } from "@/hooks/use-check-ai";
+import { Loader } from "lucide-react";
 
 declare global {
   interface Window {
@@ -91,7 +92,7 @@ export default function ChatBox() {
                     <Markdown>{chat.text}</Markdown>
                   </div>
                 ) : (
-                  <p>loading...</p>
+                  <Loader className="animate-spin" />
                 )}
               </div>
             );
@@ -108,13 +109,13 @@ export default function ChatBox() {
                 return;
               }
               const id = chatHistory.length + 1;
-              const input: ChatHistory = {
+              const input: Chat = {
                 id,
                 role: "user",
                 text: inputValue,
                 createdAt: new Date().toISOString(),
               };
-              const res: ChatHistory = {
+              const res: Chat = {
                 id: id + 1,
                 role: "assistant",
                 text: "",

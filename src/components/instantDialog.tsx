@@ -13,10 +13,12 @@ import Markdown from "react-markdown";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useCheckAI } from "@/hooks/use-check-ai";
+import { Loader } from "lucide-react";
 
 export default function InstantDialog() {
   const [output, setOutput] = useState("");
   const [time, setTime] = useState(0);
+  const [loading, setLoading] = useState(false);
   const { isAI, model } = useCheckAI();
   return (
     <Dialog>
@@ -31,25 +33,41 @@ export default function InstantDialog() {
           </DialogDescription>
         </DialogHeader>
 
+        {/* <Tabs defaultValue="normal" className="w-[400px]"> */}
+        {/*   <TabsList> */}
+        {/*     <TabsTrigger value="normal">Normal</TabsTrigger> */}
+        {/*     <TabsTrigger value="translate">Translate</TabsTrigger> */}
+        {/*   </TabsList> */}
+        {/* </Tabs> */}
+
         <Input
           onInput={async (e) => {
             const prompt = e.currentTarget.value;
             const startTime = performance.now();
+            setLoading(true);
             const res = await model?.prompt(prompt);
+            setLoading(false);
             setTime(performance.now() - startTime);
             setOutput(res);
           }}
         />
 
-        {time > 0 && (
-          <p className={cn(time > 1000 ? "text-red-500" : "text-green-500")}>
-            {time.toFixed(0)} ms
-          </p>
-        )}
-
+        {loading && <Loader className="animate-spin" />}
         {output && (
           <>
-            <header className="text-lg font-bold">output:</header>
+            <header className="text-lg font-bold">
+              output:
+              {time > 0 && (
+                <span
+                  className={cn(
+                    time > 1000 ? "text-red-500" : "text-green-500",
+                    "ml-2",
+                  )}
+                >
+                  {time.toFixed(0)} ms
+                </span>
+              )}
+            </header>
             <article className="prose rounded bg-slate-200 p-2 max-h-80 overflow-scroll">
               <Markdown>{output}</Markdown>
             </article>
