@@ -48,11 +48,25 @@ export default function ChatBox() {
 
   return (
     <div className="w-full flex-1 flex flex-col">
-      <div>
-        {isAI === null && (
-          <p className="text-lg font-medium">Checking your browser...</p>
-        )}
-      </div>
+      {!isAI && (
+        <div className="text-center mt-6">
+          {isAI === null && (
+            <p className="text-lg font-medium">Checking your browser...</p>
+          )}
+          {isAI === false && (
+            <p className="text-lg font-medium">
+              your browser is not supported Check out our
+              <Link
+                href="/help"
+                className="font-medium text-primary underline underline-offset-4 mx-2"
+              >
+                quick setup guide
+              </Link>
+              to get it running
+            </p>
+          )}
+        </div>
+      )}
       <div id="chatbox" className="p-4 overflow-y-auto flex-1">
         {chatHistory.map((chat) => {
           if (chat.role === "user") {
