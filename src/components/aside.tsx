@@ -27,8 +27,8 @@ export default function Aside() {
   return (
     <div
       className={cn(
-        "w-60 h-screen border-r pl-2 py-16 transition-all hidden md:block",
-        visible ? "translate-x-0" : "-translate-x-full w-0",
+        "w-60 h-screen py-16 transition-all hidden md:block",
+        visible ? "translate-x-0 pl-2 border-r" : "-translate-x-full w-0 h-0",
       )}
     >
       {chatHistory.map((item, index) => (
@@ -49,6 +49,9 @@ export default function Aside() {
           </Button>
         </div>
       ))}
+      <p className="text-sm text-gray-400 text-center mt-4 overflow-hidden">
+        History is stored locally
+      </p>
     </div>
   );
 }

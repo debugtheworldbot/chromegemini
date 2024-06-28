@@ -132,10 +132,9 @@ export default function ChatBox() {
               setInputValue("");
               setChatHistory(chatHistory);
               for await (const chunk of aiReplayStream) {
-                res.text = chunk;
+                console.log(chunk);
                 setChatHistory((h) => {
                   h[h.length - 1].text = chunk;
-                  console.log(chunk);
                   return [...h];
                 });
               }

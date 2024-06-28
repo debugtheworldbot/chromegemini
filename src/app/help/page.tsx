@@ -3,7 +3,7 @@ import Markdown from "react-markdown";
 
 export default function Help() {
   return (
-    <article className="prose mx-auto my-12 w-full max-w-4xl">
+    <article className="prose mx-auto mt-8 mb-12 w-full max-w-4xl px-4">
       <Markdown>{md}</Markdown>
     </article>
   );
@@ -30,7 +30,7 @@ Chrome Built-in AI is a project that runs large language models directly in your
 
 ## Privacy and Data
 
-* All AI processing occurs locally in your browser.
+* All AI processing occurs **locally** in your browser.
 * No data is sent to external servers, ensuring your conversations remain private.
 
 ## Steps to Enable Local AI
@@ -62,5 +62,5 @@ Please note that Chrome Built -in AI is currently a work in progress.Features an
 
 ## Feedback and Support
 
-For additional help or to provide feedback, please join our Discord community:
+For additional help or to provide feedback, please join our Discord community: 
 [https://discord.gg/ekDRmufC](https://discord.gg/ekDRmufC)`;
