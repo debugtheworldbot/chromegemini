@@ -21,19 +21,19 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
       value={value}
       onValueChange={setValue}
     >
-      {/* <AccordionItem value="item-1"> */}
-      {/*   <AccordionTrigger>Demo</AccordionTrigger> */}
-      {/*   <AccordionContent> */}
-      {/*     <video */}
-      {/*       src="https://ztaacy9ly66axcws.public.blo1b.vercel-storage.com/pineapplepizza-ITuvW9hPsygWTDJbW4SJsBtI9Wkh7N.mp4" */}
-      {/*       autoPlay */}
-      {/*       loop */}
-      {/*       height={360} */}
-      {/*       width={780} */}
-      {/*       preload="none" */}
-      {/*     /> */}
-      {/*   </AccordionContent> */}
-      {/* </AccordionItem> */}
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Demo</AccordionTrigger>
+        <AccordionContent>
+          <video
+            src="https://aqaya8xrbp4jczd0.public.blob.vercel-storage.com/prod-9lLt0GcmdoVCbiAbmNswd9w1z6doAu.mp4"
+            autoPlay
+            loop
+            height={360}
+            width={780}
+            preload="none"
+          />
+        </AccordionContent>
+      </AccordionItem>
       <AccordionItem value="item-3">
         <AccordionTrigger>Supported Browsers</AccordionTrigger>
         <AccordionContent>
