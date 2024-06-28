@@ -8,7 +8,7 @@ export default function Home() {
     <div className="min-h-screen w-screen flex">
       <SideTrigger />
       <Aside />
-      <main className="flex h-screen overflow-scroll ml-8 flex-1 flex-col">
+      <main className="flex h-screen overflow-scroll flex-1 flex-col">
         <Header />
 
         <div className="max-w-4xl h-full flex flex-col mx-auto">

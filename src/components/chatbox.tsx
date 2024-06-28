@@ -84,10 +84,10 @@ export default function ChatBox() {
           }
         })}
       </div>
-      <footer className="sticky bottom-0 bg-white/50 backdrop-blur pt-2">
+      <footer className="sticky bottom-0 rounded bg-white/50 backdrop-blur pt-2">
         {isAI !== null && (
           <form
-            className=" flex w-full items-center space-x-2 mt-auto"
+            className="flex w-full items-center gap-4 px-2 mt-auto"
             onSubmit={async (form) => {
               form.preventDefault();
               if (inputValue === "") {

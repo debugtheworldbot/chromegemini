@@ -6,8 +6,8 @@ import InstantDialog from "./instantDialog";
 
 export default function Header() {
   return (
-    <div className="sticky py-4 top-0 bg-white/50 backdrop-blur flex justify-between">
-      <div className="flex min-w-0 flex-col gap-1 lg:ml-20">
+    <header className="sticky p-4 top-0 bg-white/50 backdrop-blur flex justify-between flex-col sm:flex-row gap-2">
+      <div className="flex min-w-0 flex-col gap-1 lg:ml-16">
         <h1 className="font-cal text-3xl flex gap-4">
           ChromeAI.org
           <Badge className="leading-5 self-center">Gemini Nano</Badge>
@@ -24,6 +24,6 @@ export default function Header() {
           <Link href="/help">HELP & INTRODUCTION</Link>
         </Button>
       </div>
-    </div>
+    </header>
   );
 }
