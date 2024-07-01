@@ -34,7 +34,7 @@ export function IncompatibleBrowserAlert({
               onClick={() => openInstructions()}
             >
               Follow these instructions
-            </button>
+            </button>{" "}
             to enable it.
           </>
         ),
