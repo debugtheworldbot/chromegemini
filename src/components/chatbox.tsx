@@ -138,16 +138,11 @@ export default function ChatBox() {
                 };
 
                 chatHistory.push(input);
-                const prompt = `${chatHistory.map((chat) => {
-                  return `${chat.role}: ${chat.text}\n`;
-                })}\nassistant:`;
                 chatHistory.push(res);
-                console.log("submit", prompt);
-                const aiReplayStream = await model?.promptStreaming(prompt);
+                const aiReplayStream = await model?.promptStreaming(inputValue);
                 setInputValue("");
                 setChatHistory(chatHistory);
                 for await (const chunk of aiReplayStream) {
-                  console.log(chunk);
                   setChatHistory((h) => {
                     h[h.length - 1].text = chunk;
                     return [...h];
