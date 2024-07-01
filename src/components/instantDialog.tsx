@@ -60,7 +60,11 @@ export default function InstantDialog() {
               {time > 0 && (
                 <span
                   className={cn(
-                    time > 1000 ? "text-red-500" : "text-green-500",
+                    time > 5000
+                      ? "text-red-500"
+                      : time > 1000
+                        ? "text-yellow-400"
+                        : "text-green-500",
                     "ml-2",
                   )}
                 >
