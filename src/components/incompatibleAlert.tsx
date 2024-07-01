@@ -28,9 +28,9 @@ export function IncompatibleBrowserAlert({
         title: "Please Enable Flags & Download Model",
         message: (
           <>
-            Built-in AI is not ready.
+            Built-in AI is not ready.{" "}
             <button
-              className="underline hover:opacity-70 focus:outline-red-400 pl-1"
+              className="underline hover:opacity-70 focus:outline-red-400"
               onClick={() => openInstructions()}
             >
               Follow these instructions
@@ -46,9 +46,9 @@ export function IncompatibleBrowserAlert({
         title: isChrome ? "Please Update Chrome" : "Please Switch to Chrome",
         message: (
           <>
-            Your browser is
+            Your browser is{" "}
             <button
-              className="underline hover:opacity-70 focus:outline-red-400 pl-1"
+              className="underline hover:opacity-70 focus:outline-red-400"
               onClick={() => showSupportedBrowsers()}
             >
               not supported

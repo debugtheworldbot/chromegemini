@@ -63,8 +63,8 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
                       {i + 1}
                     </div>
                     <div className="w-full">
-                      <h4 className="font-medium">
-                        Step {i + 1}: {f.flag}
+                      <h4 className="font-medium mb-1 -ml-1">
+                        <CodeSnippet>{f.flag}</CodeSnippet>
                       </h4>
                       <p className="text-muted-foreground">{f.instruction}</p>
                     </div>
@@ -88,7 +88,7 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
               </div>
               <p>
                 PS: Make sure you are logged into chrome. For now, Incognito and
-                Guest modes are not supported
+                Guest modes are not supported.
               </p>
             </div>
           </div>

@@ -22,6 +22,7 @@ export const useCheckAI = () => {
       if (e instanceof Error) {
         setError(e?.message);
       }
+      setIsAI(false);
     }
   };
 

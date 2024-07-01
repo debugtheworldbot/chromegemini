@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { IncompatibleBrowserAlert } from "./incompatibleAlert";
 import { FlagAccordion } from "./flagTable";
-import Link from "next/link";
-import { CodeSnippet } from "./codeSnippet";
 import { Dialog, DialogContent, DialogOverlay, DialogTitle } from "./ui/dialog";
 
-export function Modal({ error }: { error?: any }) {
+export function Modal({ error }: { error?: string }) {
   const [selectedAccordionValue, setSelectedSelectedAccordionValue] = useState<
     string | undefined
   >();
@@ -15,9 +13,9 @@ export function Modal({ error }: { error?: any }) {
 
   return (
     <Dialog open>
-      <DialogOverlay className="bg-black/10" />
+      <DialogOverlay className="bg-black/10 backdrop-blur-sm" />
       <DialogContent
-        className="sm:h-fit h-full flex flex-col sm:block sm:max-h-screen sm:justify-center py-4 px-8 max-w-2xl overflow-y-scroll"
+        className="sm:h-fit h-full flex flex-col sm:block sm:max-h-screen sm:justify-center py-4 sm:px-8 max-w-2xl overflow-y-scroll"
         hideCloseButton
       >
         <DialogTitle className="text-3xl text-center mb-4">
