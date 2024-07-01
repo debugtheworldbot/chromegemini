@@ -83,7 +83,7 @@ export default function ChatBox() {
         <>
           <div
             id="chatbox"
-            className="p-4 overflow-y-auto flex-1 min-w-[800px]"
+            className="p-4 overflow-y-auto flex-1 md:min-w-[800px]"
           >
             {chatHistory.map((chat) => {
               if (chat.role === "user") {
@@ -115,7 +115,7 @@ export default function ChatBox() {
               }
             })}
           </div>
-          <footer className="sticky bottom-4 rounded bg-white/50 backdrop-blur pt-2">
+          <footer className="sticky bottom-0 pb-4 rounded bg-white/50 backdrop-blur pt-2">
             <form
               className="flex w-full items-center gap-4 px-2 mt-auto"
               onSubmit={async (form) => {
@@ -189,7 +189,7 @@ export default function ChatBox() {
               Compare the results among ChromeAI, ChatGPT, Claude, and Llama in{" "}
               <Link
                 className="underline"
-                href="chathub.gg/?via=ChromeAIorg"
+                href="https://chathub.gg/?via=ChromeAIorg"
                 target="_blank"
               >
                 ChatHub
