@@ -7,7 +7,7 @@ import { Input } from "./ui/input";
 import { Chat, currentChatAtom, historyAtom } from "@/lib/store";
 import { useAtom } from "jotai";
 import { useCheckAI } from "@/hooks/use-check-ai";
-import { Loader, SquarePlus } from "lucide-react";
+import { Loader, SquarePen } from "lucide-react";
 import { ErrorModal } from "./errorModal";
 import Link from "next/link";
 import {
@@ -65,8 +65,10 @@ export default function ChatBox() {
             </p>
           )}
           {isAI === false && (
-            <div className="text-lg font-medium">
-              your browser is not supported Check out our
+            <div className="text-lg font-medium mx-4">
+              Your browser is not supported.
+              <br />
+              Check out our
               <ErrorModal
                 error={error}
                 trigger={
@@ -75,7 +77,7 @@ export default function ChatBox() {
                   </p>
                 }
               />
-              to get it running
+              to get it running!
             </div>
           )}
         </div>
@@ -154,8 +156,13 @@ export default function ChatBox() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button type="reset" disabled={!isAI} variant="outline">
-                      <SquarePlus />
+                    <Button
+                      type="reset"
+                      className="p-2"
+                      disabled={!isAI}
+                      variant="outline"
+                    >
+                      <SquarePen />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>

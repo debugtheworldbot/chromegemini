@@ -27,7 +27,7 @@ export default function Aside() {
   return (
     <div
       className={cn(
-        "w-60 h-screen py-16 transition-all hidden md:block",
+        "w-60 h-screen py-16 pb-8 transition-all hidden md:block overflow-scroll",
         visible ? "translate-x-0 pl-2 border-r" : "-translate-x-full w-0 h-0",
       )}
     >

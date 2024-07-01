@@ -96,7 +96,7 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-5">
-        <AccordionTrigger>
+        <AccordionTrigger className="text-left">
           Compare the results among ChromeAI, ChatGPT, Claude, and Llama
         </AccordionTrigger>
         <AccordionContent>
