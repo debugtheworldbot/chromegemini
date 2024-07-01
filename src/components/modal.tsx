@@ -3,6 +3,7 @@ import { IncompatibleBrowserAlert } from "./incompatibleAlert";
 import { FlagAccordion } from "./flagTable";
 import Link from "next/link";
 import { CodeSnippet } from "./codeSnippet";
+import { Dialog, DialogContent, DialogOverlay, DialogTitle } from "./ui/dialog";
 
 export function Modal({ error }: { error?: any }) {
   const [selectedAccordionValue, setSelectedSelectedAccordionValue] = useState<
@@ -13,17 +14,15 @@ export function Modal({ error }: { error?: any }) {
     setSelectedSelectedAccordionValue("item-3");
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur">
-      <div className="h-full sm:h-fit flex flex-col items-center justify-start sm:justify-center gap-4 sm:rounded-lg bg-white p-8 max-w-2xl overflow-y-scroll">
-        <h2 className="text-3xl font-bold">ChromeAI Gemini Chatbot</h2>
-        <p>
-          Gemini Nano&apos;s Prompt API is exposed on the browser&apos;s
-          <CodeSnippet>window.ai</CodeSnippet>function. It can be easily called
-          from your browser locally.
-          <Link className="underline text-gray-500 ml-2" href="/help">
-            More help
-          </Link>
-        </p>
+    <Dialog open>
+      <DialogOverlay className="bg-black/10" />
+      <DialogContent
+        className="sm:h-fit h-full flex flex-col sm:block sm:max-h-screen sm:justify-center py-4 px-8 max-w-2xl overflow-y-scroll"
+        hideCloseButton
+      >
+        <DialogTitle className="text-3xl text-center mb-4">
+          ChromeAI Gemini Chatbot
+        </DialogTitle>
         <div className="w-full pt-2 space-y-2">
           {error ? (
             <IncompatibleBrowserAlert
@@ -37,7 +36,7 @@ export function Modal({ error }: { error?: any }) {
             setValue={setSelectedSelectedAccordionValue}
           />
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

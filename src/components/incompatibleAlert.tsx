@@ -28,13 +28,13 @@ export function IncompatibleBrowserAlert({
         title: "Please Enable Flags & Download Model",
         message: (
           <>
-            Built-in AI is not ready.{" "}
+            Built-in AI is not ready.
             <button
-              className="underline hover:opacity-70"
+              className="underline hover:opacity-70 focus:outline-red-400 pl-1"
               onClick={() => openInstructions()}
             >
               Follow these instructions
-            </button>{" "}
+            </button>
             to enable it.
           </>
         ),
@@ -46,27 +46,19 @@ export function IncompatibleBrowserAlert({
         title: isChrome ? "Please Update Chrome" : "Please Switch to Chrome",
         message: (
           <>
-            Your browser is{" "}
+            Your browser is
             <button
-              className="underline hover:opacity-70"
+              className="underline hover:opacity-70 focus:outline-red-400 pl-1"
               onClick={() => showSupportedBrowsers()}
             >
               not supported
             </button>
-            .{" "}
-            {isChrome ? (
-              "Please update Chrome to version 127 or higher."
-            ) : (
-              <>
-                Please switch to Chrome (
-                <Link href="https://www.google.com/chrome/dev/?extra=devchannel">
-                  Dev
-                </Link>{" "}
-                or{" "}
-                <Link href="https://www.google.com/chrome/canary/">Canary</Link>
-                ).
-              </>
-            )}
+            . Please switch to Chrome (
+            <Link href="https://www.google.com/chrome/dev/?extra=devchannel">
+              Dev
+            </Link>{" "}
+            or <Link href="https://www.google.com/chrome/canary/">Canary</Link>)
+            version 127 or higher.
           </>
         ),
       },

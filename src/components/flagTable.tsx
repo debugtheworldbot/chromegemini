@@ -52,8 +52,8 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
         <AccordionTrigger>Necessary Experimental Flags</AccordionTrigger>
         <AccordionContent>
           <div className="flex items-center justify-center">
-            <div className="space-y-4">
-              <ol className="grid gap-4 counter-reset:step">
+            <div className="space-y-4 w-full">
+              <ul className="grid gap-4 counter-reset:step">
                 {flags.map((f, i) => (
                   <li
                     key={"flag_" + i.toString()}
@@ -70,7 +70,7 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
                     </div>
                   </li>
                 ))}
-              </ol>
+              </ul>
 
               <div>
                 If you followed the instructions, still can&#39;t see
