@@ -8,7 +8,7 @@ import { Chat, currentChatAtom, historyAtom } from "@/lib/store";
 import { useAtom } from "jotai";
 import { useCheckAI } from "@/hooks/use-check-ai";
 import { Loader } from "lucide-react";
-import { Modal } from "./modal";
+import { ErrorModal } from "./errorModal";
 
 declare global {
   interface Window {
@@ -49,13 +49,27 @@ export default function ChatBox() {
 
   return (
     <div className="w-full flex-1 flex flex-col">
-      {error && <Modal error={error} />}
+      <ErrorModal error={error} />
       {!isAI ? (
         <div className="text-center my-auto">
           {isAI === null && (
             <p className="text-2xl font-medium flex items-center mb-16">
               <Loader className="animate-spin mr-2" /> Checking your browser...
             </p>
+          )}
+          {isAI === false && (
+            <div className="text-lg font-medium">
+              your browser is not supported Check out our
+              <ErrorModal
+                error={error}
+                trigger={
+                  <p className="font-medium text-primary underline underline-offset-4 mx-2">
+                    quick setup guide
+                  </p>
+                }
+              />
+              to get it running
+            </div>
           )}
         </div>
       ) : (
@@ -151,12 +165,6 @@ export default function ChatBox() {
                 Send
               </Button>
             </form>
-            <div className="my-4 text-gray-400 text-center">
-              <p className="text-sm font-medium leading-none">
-                ✅ Your chrome support Built-in AI. Your messages stay on your
-                computer, everything is kept private and local.
-              </p>
-            </div>
           </footer>
         </>
       )}
