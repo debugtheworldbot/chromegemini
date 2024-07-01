@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { ExternalLink } from "./externalLink";
 import { CodeSnippet } from "./codeSnippet";
+import Link from "next/link";
 
 interface FlagAccordionProps {
   value: string | undefined;
@@ -92,6 +93,22 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
               </p>
             </div>
           </div>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-5">
+        <AccordionTrigger>
+          Compare the results among ChromeAI, ChatGPT, Claude, and Llama
+        </AccordionTrigger>
+        <AccordionContent>
+          Compare the results among ChromeAI, ChatGPT, Claude, and Llama in{" "}
+          <Link
+            className="underline"
+            href="chathub.gg/?via=ChromeAIorg"
+            target="_blank"
+          >
+            ChatHub
+          </Link>
+          .
         </AccordionContent>
       </AccordionItem>
     </Accordion>

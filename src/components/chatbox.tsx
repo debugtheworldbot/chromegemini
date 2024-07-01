@@ -7,8 +7,15 @@ import { Input } from "./ui/input";
 import { Chat, currentChatAtom, historyAtom } from "@/lib/store";
 import { useAtom } from "jotai";
 import { useCheckAI } from "@/hooks/use-check-ai";
-import { Loader } from "lucide-react";
+import { Loader, SquarePlus } from "lucide-react";
 import { ErrorModal } from "./errorModal";
+import Link from "next/link";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 declare global {
   interface Window {
@@ -74,7 +81,10 @@ export default function ChatBox() {
         </div>
       ) : (
         <>
-          <div id="chatbox" className="p-4 overflow-y-auto flex-1">
+          <div
+            id="chatbox"
+            className="p-4 overflow-y-auto flex-1 min-w-[800px]"
+          >
             {chatHistory.map((chat) => {
               if (chat.role === "user") {
                 return (
@@ -105,7 +115,7 @@ export default function ChatBox() {
               }
             })}
           </div>
-          <footer className="sticky bottom-0 rounded bg-white/50 backdrop-blur pt-2">
+          <footer className="sticky bottom-4 rounded bg-white/50 backdrop-blur pt-2">
             <form
               className="flex w-full items-center gap-4 px-2 mt-auto"
               onSubmit={async (form) => {
@@ -146,9 +156,18 @@ export default function ChatBox() {
               }}
               onReset={onReset}
             >
-              <Button type="reset" disabled={!isAI}>
-                New Chat
-              </Button>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button type="reset" disabled={!isAI} variant="outline">
+                      <SquarePlus />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Create new chat</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
               <Input
                 placeholder="Chat to Chrome on-device AI locally, no internet connected."
                 name="text"
@@ -165,6 +184,18 @@ export default function ChatBox() {
                 Send
               </Button>
             </form>
+
+            <p className="text-center mt-2 text-zinc-600 font-medium">
+              Compare the results among ChromeAI, ChatGPT, Claude, and Llama in{" "}
+              <Link
+                className="underline"
+                href="chathub.gg/?via=ChromeAIorg"
+                target="_blank"
+              >
+                ChatHub
+              </Link>
+              .
+            </p>
           </footer>
         </>
       )}
