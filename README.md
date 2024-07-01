@@ -53,4 +53,6 @@ For any questions or feedback, please join ours [Discord](https://discord.gg/ekD
 
 ## Special Thanks
 
-- [Lightning Joyce](https://github.com/lightning-joyce)
+This project is based on [chromeai](https://github.com/lightning-joyce/chromeai) by Lightning Joyce.
+
+The original project is licensed under the MIT License. See the LICENSE file for more details.
