@@ -26,13 +26,6 @@ Chrome AI is a demo project that runs large language models locally within the b
 6. **Troubleshoot**: If the "Optimization Guide On Device Model" is not displayed, disable the settings in steps 2 and 3, restart your browser and re-enable it.
 7. **Verify Setup**: Open a webpage, press F12, and check `window.ai` in the console.
 
-**Test Code**:
-
-```javascript
-const model = await window.ai.createTextSession();
-await model.prompt("Who are you?");
-```
-
 ### Usage
 
 Clone the repository:
@@ -56,4 +49,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or feedback, please contact Lightning Joyce on [Twitter](https://twitter.com/LightningJoyce).
+For any questions or feedback, please join ours [Discord](https://discord.gg/ekDRmufC).
+
+## Special Thanks
+
+- [Lightning Joyce](https://github.com/lightning-joyce)

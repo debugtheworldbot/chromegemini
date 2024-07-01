@@ -77,8 +77,9 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
                 <span className="font-medium mx-1">
                   Optimization Guide On Device Model,
                 </span>
-                please wait a moment. You can input this code into your console
-                to check download status:
+                it means the model is not downloaded yet. Please just wait a
+                moment. You can run this code in your console to verify the
+                download status:
                 <p className="mt-1">
                   <CodeSnippet>
                     await window.ai.canCreateGenericSession()
