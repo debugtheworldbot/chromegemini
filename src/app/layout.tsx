@@ -38,6 +38,12 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6794864725006505"
           crossOrigin="anonymous"
         ></script>
+        <script
+          defer
+          data-domain="chromeai.org"
+          src="https://plausible.midway.run/js/script.js"
+        ></script>
+
         <GoogleAnalytics gaId="G-B7E1N121PK" />
       </body>
     </html>
