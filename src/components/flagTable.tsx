@@ -79,13 +79,8 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
                   Optimization Guide On Device Model,
                 </span>
                 it means the model is not downloaded yet. Please just wait a
-                moment. You can run this code in your console to verify the
-                download status:
-                <p className="mt-1">
-                  <CodeSnippet>
-                    await window.ai.canCreateGenericSession()
-                  </CodeSnippet>
-                </p>
+                moment. You can click the Rechck button to recheck download
+                status.
               </div>
               <p>
                 PS: Make sure you are logged into chrome. For now, Incognito and

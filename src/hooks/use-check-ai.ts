@@ -1,6 +1,12 @@
 import { checkEnv } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
+export enum AIModelAvailability {
+  "readily",
+  "after-download",
+  "no",
+}
+
 const checkAI = async () => {
   await checkEnv();
   return true;
