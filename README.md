@@ -32,7 +32,7 @@ Clone the repository:
 
 ```bash
 git clone git@github.com:debugtheworldbot/chromegemini.git
-cd chromeai
+cd chromegemini
 pnpm i
 pnpm dev
 ```
