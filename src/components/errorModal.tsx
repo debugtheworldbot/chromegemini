@@ -5,7 +5,6 @@ import { Dialog, DialogContent, DialogOverlay, DialogTitle } from "./ui/dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
 import { AIModelAvailability } from "@/hooks/use-check-ai";
-import { Loader } from "lucide-react";
 import { CodeSnippet } from "./codeSnippet";
 import { Badge } from "./ui/badge";
 import {
@@ -28,14 +27,16 @@ export function ErrorModal({
 
   const [open, setOpen] = useState(!!error);
   const [state, setState] = useState<AIModelAvailability | null>(null);
+  const [hasAi, setHasAi] = useState(false);
 
   const checkStatus = async () => {
     setState(null);
-    const state: AIModelAvailability = await window.ai?.canCreateTextSession();
+    const state: AIModelAvailability = await window?.ai?.canCreateTextSession();
     setState(state);
   };
 
   useEffect(() => {
+    setHasAi(!!window.ai);
     if (open) {
       checkStatus();
     }
@@ -53,7 +54,7 @@ export function ErrorModal({
         <DialogTitle className="text-3xl text-center mb-4">
           ChromeAI Gemini Chatbot
         </DialogTitle>
-        {window.ai && (
+        {hasAi && (
           <div className="flex justify-center items-center gap-4">
             <TooltipProvider>
               <Tooltip>

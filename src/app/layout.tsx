@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://chromeai.org"),
   title: "Chrome Built-In AI Gemini Nano Test Page",
   description:
     "Run Chrome built-in large language model AI locally in your browser.",
