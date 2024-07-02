@@ -8,7 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Chrome Built-in AI",
+  title: "Chrome Built-In AI Gemini Nano Test Page",
   description:
     "Run Chrome built-in large language model AI locally in your browser.",
   keywords: [
@@ -19,7 +19,25 @@ export const metadata: Metadata = {
     "chrome gemini",
     "chrome ai",
     "chrome gemini nano",
+    "native AI",
+    "chrome AI",
+    "built-in AI",
+    "on-device AI",
+    "window AI",
   ],
+  openGraph: {
+    type: "website",
+    url: "https://chromeai.org",
+    title: "Chrome Built-In AI Gemini Nano Test Page",
+    description:
+      "Run Chrome built-in large language model AI locally in your browser.",
+    siteName: "Chrome Built-In AI Gemini Nano Test Page",
+    images: [
+      {
+        url: "https://aqaya8xrbp4jczd0.public.blob.vercel-storage.com/og-image-1200x630-JrAn2JkX2GNCg6TeP40EdLVsqyHIUO.jpg",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
