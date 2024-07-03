@@ -62,7 +62,7 @@ export function ErrorModal({
                   <p>
                     Your <CodeSnippet>window.ai</CodeSnippet>
                     {"'s"} status:
-                    <Badge className="ml-2">{state}</Badge>
+                    <Badge className="text-base ml-2">{state}</Badge>
                   </p>
                 </TooltipTrigger>
                 <TooltipContent>
