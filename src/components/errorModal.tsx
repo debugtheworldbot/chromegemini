@@ -33,6 +33,9 @@ export function ErrorModal({
     setState(null);
     const state: AIModelAvailability = await window?.ai?.canCreateTextSession();
     setState(state);
+    if (state === "readily") {
+      location.reload();
+    }
   };
 
   useEffect(() => {
