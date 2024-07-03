@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import InstantDialog from "./instantDialog";
-import { Github } from "lucide-react";
+import { Chrome, Github, CircleHelp } from "lucide-react";
 
 export default function Header() {
   return (
@@ -19,11 +19,22 @@ export default function Header() {
           </span>
         </div>
       </div>
-      <div className="flex gap-4 items-center">
+      <div className="flex flex-wrap gap-4 items-center">
         <InstantDialog />
-        <Button variant="secondary" className="my-auto rounded-full">
-          <Link href="/help">HELP</Link>
-        </Button>
+        <Link
+          target="_blank"
+          href="https://chromewebstore.google.com/detail/pienijlenieciiamahkllplgadmdibjm"
+        >
+          <Button className="flex gap-2" variant="outline">
+            <Chrome />
+            Extension
+          </Button>
+        </Link>
+        <Link href="/help">
+          <Button variant="secondary">
+            <CircleHelp />
+          </Button>
+        </Link>
         <Link
           href="https://github.com/debugtheworldbot/chromegemini"
           target="_blank"
