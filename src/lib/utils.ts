@@ -11,6 +11,9 @@ export async function checkEnv() {
     return raw ? parseInt(raw[2], 10) : 0;
   }
 
+  // @ts-expect-error
+  const state = await ai?.canCreateTextSession();
+  if (state === "readily") return;
   const version = getChromeVersion();
   if (version < 127) {
     throw new Error(
@@ -24,8 +27,6 @@ export async function checkEnv() {
     );
   }
 
-  // @ts-expect-error
-  const state = await ai?.canCreateTextSession();
   if (state !== "readily") {
     throw new Error(
       "Built-in AI is not ready, check your configuration in chrome://flags/#optimization-guide-on-device-model",

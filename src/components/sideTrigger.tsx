@@ -11,7 +11,7 @@ export default function SideTrigger() {
   return (
     <Button
       onClick={() => setVisible((v) => !v)}
-      className="fixed top-5 left-2 z-10 sm:block hidden bg-white/70 backdrop-blur"
+      className="fixed top-5 left-2 z-10 md:block hidden bg-white/70 backdrop-blur"
       variant="ghost"
     >
       <CircleChevronLeft

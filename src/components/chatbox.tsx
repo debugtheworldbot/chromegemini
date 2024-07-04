@@ -187,7 +187,7 @@ export default function ChatBox() {
               </Button>
             </form>
 
-            <p className="text-center mt-2 text-zinc-600 font-medium">
+            <p className="text-center mt-2 text-zinc-600 font-medium mx-2">
               Compare the results among ChromeAI, ChatGPT, Claude, and Llama in{" "}
               <Link
                 className="underline"

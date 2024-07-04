@@ -62,11 +62,11 @@ export function ErrorModal({
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger tabIndex={-1}>
-                  <p>
+                  <div>
                     Your <CodeSnippet>window.ai</CodeSnippet>
                     {"'s"} status:
                     <Badge className="text-base ml-2">{state}</Badge>
-                  </p>
+                  </div>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>all statuses: readily, after-download, no </p>
