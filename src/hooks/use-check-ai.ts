@@ -1,4 +1,3 @@
-import { ModalSettings } from "@/components/settingsDialog";
 import { settingsAtom } from "@/lib/store";
 import { checkEnv } from "@/lib/utils";
 import { useAtomValue } from "jotai";

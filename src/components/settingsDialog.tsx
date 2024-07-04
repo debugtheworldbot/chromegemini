@@ -45,11 +45,11 @@ const formSchema = z.object({
   temperature: z.number().min(0).max(1),
   topK: z.number().min(1),
 });
-export type ModalSettings = z.infer<typeof formSchema>;
+export type ModelSettings = z.infer<typeof formSchema>;
 export const SettingsDialog = () => {
   const [settings, setSettings] = useAtom(settingsAtom);
   const { toast } = useToast();
-  const form = useForm<ModalSettings>({
+  const form = useForm<ModelSettings>({
     resolver: zodResolver(formSchema),
     defaultValues: settings,
     values: settings,
@@ -68,7 +68,7 @@ export const SettingsDialog = () => {
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogTitle>Modal Settings</DialogTitle>
+        <DialogTitle>Model Settings</DialogTitle>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
