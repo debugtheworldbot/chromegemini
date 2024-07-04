@@ -230,7 +230,7 @@ export const SettingsDialog = () => {
               target="_blank"
               className="text-sm underline"
             >
-              Want know more about Temperature and Top-K?
+              Want to know more about Temperature and Top-K?
             </Link>
             <DialogTrigger asChild>
               <Button type="submit">Save</Button>
