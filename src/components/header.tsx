@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import InstantDialog from "./instantDialog";
 import { Chrome, Github, CircleHelp } from "lucide-react";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -20,6 +21,7 @@ export default function Header() {
         </p>
       </div>
       <div className="flex flex-wrap gap-4 items-center">
+        {/* <SettingsDialog /> */}
         <InstantDialog />
         <Link
           className="hidden md:block"
@@ -31,9 +33,14 @@ export default function Header() {
             Extension
           </Button>
         </Link>
-        <Link className="" href="/help">
+        <Link href="/help">
           <Button size="icon" variant="ghost">
             <CircleHelp />
+          </Button>
+        </Link>
+        <Link href="https://discord.gg/ZrF4kjUBhJ" target="_blank">
+          <Button size="icon" variant="ghost">
+            <Image src="/discord.svg" width={24} height={24} alt="" />
           </Button>
         </Link>
         <Link
