@@ -38,7 +38,7 @@ import { Settings } from "lucide-react";
 import { useAtom } from "jotai";
 import { settingsAtom } from "@/lib/store";
 import Link from "next/link";
-import { toast } from "sonner";
+import { useToast } from "./ui/use-toast";
 
 const formSchema = z.object({
   model: z.enum(["generic", "text"]),
@@ -48,6 +48,7 @@ const formSchema = z.object({
 export type ModalSettings = z.infer<typeof formSchema>;
 export const SettingsDialog = () => {
   const [settings, setSettings] = useAtom(settingsAtom);
+  const { toast } = useToast();
   const form = useForm<ModalSettings>({
     resolver: zodResolver(formSchema),
     defaultValues: settings,
@@ -56,7 +57,7 @@ export const SettingsDialog = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setSettings(values);
-    toast("Settings saved");
+    toast({ title: "Settings updated" });
   }
 
   return (
