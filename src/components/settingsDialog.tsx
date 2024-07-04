@@ -35,23 +35,28 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "./ui/button";
 import { Settings } from "lucide-react";
+import { useAtom } from "jotai";
+import { settingsAtom } from "@/lib/store";
+import Link from "next/link";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   model: z.enum(["generic", "text"]),
   temperature: z.number().min(0).max(1),
   topK: z.number().min(1),
 });
+export type ModalSettings = z.infer<typeof formSchema>;
 export const SettingsDialog = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const [settings, setSettings] = useAtom(settingsAtom);
+  const form = useForm<ModalSettings>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      model: "generic",
-      temperature: 0.8,
-      topK: 3,
-    },
+    defaultValues: settings,
+    values: settings,
   });
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    setSettings(values);
+    toast("Settings saved");
   }
 
   return (
@@ -123,9 +128,11 @@ export const SettingsDialog = () => {
                     <TooltipProvider delayDuration={0}>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <div className="grid gap-3">
+                          <div className="grid gap-3 hover:cursor-help">
                             <div className="flex items-center justify-between">
-                              <FormLabel>Temperature</FormLabel>
+                              <FormLabel className="hover:cursor-help">
+                                Temperature
+                              </FormLabel>
                               <span className="text-right text-sm text-muted-foreground">
                                 {field.value}
                               </span>
@@ -138,10 +145,8 @@ export const SettingsDialog = () => {
                           className="w-80"
                         >
                           <p className="m-2">
-                            The value is passed through to the provider. <br />
-                            The range depends on the provider and model. For
-                            most providers, 0 means almost deterministic
-                            results, and higher values mean more randomness.
+                            0 means almost deterministic results, and higher
+                            values mean more randomness.
                           </p>
                         </TooltipContent>
                       </Tooltip>
@@ -149,11 +154,11 @@ export const SettingsDialog = () => {
 
                     <FormControl>
                       <Slider
-                        onValueChange={field.onChange}
+                        onValueChange={(v) => field.onChange(v[0])}
                         value={[field.value]}
                         id="temperature"
                         className="hover:cursor-pointer"
-                        defaultValue={[0.8]}
+                        defaultValue={[settings.temperature]}
                         max={1}
                         min={0}
                         step={0.1}
@@ -172,9 +177,11 @@ export const SettingsDialog = () => {
                     <TooltipProvider delayDuration={0}>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <div className="grid gap-3">
+                          <div className="grid gap-3 hover:cursor-help">
                             <div className="flex items-center justify-between">
-                              <FormLabel>Top K</FormLabel>
+                              <FormLabel className="hover:cursor-help">
+                                Top K
+                              </FormLabel>
                               <span className="text-right text-sm text-muted-foreground">
                                 {field.value}
                               </span>
@@ -187,11 +194,14 @@ export const SettingsDialog = () => {
                           className="w-80"
                         >
                           <p className="m-2">
-                            Only sample from the top K options for each
-                            subsequent token. <br />
-                            Used to remove &quot;long tail&quot; low probability
-                            responses. Recommended for advanced use cases only.
-                            You usually only need to use temperature.
+                            Top-k is to limit the model
+                            {"'"}s choices when generating text.
+                            <br />
+                            <span className="font-medium">Small Top-k: </span>
+                            responses are more focused and predictable.
+                            <br />
+                            <span className="font-medium">Large Top-k: </span>
+                            responses are more diverse and creative.
                           </p>
                         </TooltipContent>
                       </Tooltip>
@@ -201,9 +211,9 @@ export const SettingsDialog = () => {
                       <Slider
                         id="topK"
                         className="hover:cursor-pointer"
-                        onValueChange={field.onChange}
+                        onValueChange={(v) => field.onChange(v[0])}
                         value={[field.value]}
-                        defaultValue={[3]}
+                        defaultValue={[settings.topK]}
                         max={20}
                         min={1}
                         step={1}
@@ -215,7 +225,16 @@ export const SettingsDialog = () => {
                 )}
               />
             </fieldset>
-            <Button type="submit">Save</Button>
+            <Link
+              href="https://gemini.google.com/share/a4665036f4b9"
+              target="_blank"
+              className="text-sm underline"
+            >
+              Want know more about Temperature and Top-K?
+            </Link>
+            <DialogTrigger asChild>
+              <Button type="submit">Save</Button>
+            </DialogTrigger>
           </form>
         </Form>
       </DialogContent>

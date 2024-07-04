@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -62,6 +63,7 @@ export default function RootLayout({
           data-domain="chromeai.org"
           src="https://plausible.midway.run/js/script.js"
         ></script>
+        <Toaster />
 
         <GoogleAnalytics gaId="G-B7E1N121PK" />
       </body>
