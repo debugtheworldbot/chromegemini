@@ -49,7 +49,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or feedback, please join ours [Discord](https://discord.gg/ekDRmufC).
+If you want to know more about chrome ai or have any feedback, please join ours [Discord](https://discord.gg/ZrF4kjUBhJ).
 
 ## Special Thanks
 
@@ -57,10 +57,10 @@ This project is based on [chromeai](https://github.com/lightning-joyce/chromeai)
 
 The original project is licensed under the MIT License. See the LICENSE file for more details.
 
-### More Chrome AI project
+## More Chrome AI project
 
-- **Chrome official example** :  [Using Chrome AI to describe the weathe](https://x.com/ChromiumDev/status/1807817071700447306)
-- **@pylthon** : [Use Chrome AI capabilities in the Chrome extension, select web page content and summarize it](https://x.com/pylthon/status/1806304233043501561)、[@varunshenoy_](https://x.com/varunshenoy_/status/1808199306828198214)
+- **Chrome official example** : [Using Chrome AI to describe the weathe](https://x.com/ChromiumDev/status/1807817071700447306)
+- **@pylthon** : [Use Chrome AI capabilities in the Chrome extension, select web page content and summarize it](https://x.com/pylthon/status/1806304233043501561)、[@varunshenoy\_](https://x.com/varunshenoy_/status/1808199306828198214)
 - **@shivam_chauhan0** : [Help you write Twitter comment content](https://x.com/shivam_chauhan0/status/1807829573679435791)
 - **@webml-demo** : [Offline summary of local document content](https://webml-demo.vercel.app/?provider=chrome_ai)
 - **@mortenjust** : [Email writing assistant](https://x.com/mortenjust/status/1808093127976079805)

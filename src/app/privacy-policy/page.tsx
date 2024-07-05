@@ -46,7 +46,7 @@ As we do not collect or store any of your personal data, there is no need for da
 
 ## Contact Us
 
-If you have any questions or concerns about our privacy practices, please contact us at https://discord.gg/ekDRmufC.
+If you have any questions or concerns about our privacy practices, please contact us at https://discord.gg/ZrF4kjUBhJ.
 
 This policy is effective as of 28 June 2024.
 
