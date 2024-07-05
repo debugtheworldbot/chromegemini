@@ -12,7 +12,7 @@ export async function checkEnv() {
   }
 
   const version = getChromeVersion();
-  if (version < 127) {
+  if (version < 127 && !("ai" in globalThis)) {
     throw new Error(
       "Your browser is not supported. Please update to 127 version or greater.",
     );
@@ -25,7 +25,7 @@ export async function checkEnv() {
   }
 
   // @ts-expect-error
-  const state = await ai?.canCreateTextSession();
+  const state: AIModelAvailability = await ai?.canCreateTextSession();
   if (state !== "readily") {
     throw new Error(
       "Built-in AI is not ready, check your configuration in chrome://flags/#optimization-guide-on-device-model",
