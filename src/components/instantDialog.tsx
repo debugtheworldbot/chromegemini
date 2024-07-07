@@ -20,6 +20,7 @@ export default function InstantDialog() {
   const [time, setTime] = useState(0);
   const [loading, setLoading] = useState(false);
   const { isAI, model } = useCheckAI();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -33,14 +34,8 @@ export default function InstantDialog() {
           </DialogDescription>
         </DialogHeader>
 
-        {/* <Tabs defaultValue="normal" className="w-[400px]"> */}
-        {/*   <TabsList> */}
-        {/*     <TabsTrigger value="normal">Normal</TabsTrigger> */}
-        {/*     <TabsTrigger value="translate">Translate</TabsTrigger> */}
-        {/*   </TabsList> */}
-        {/* </Tabs> */}
-
         <Input
+          className="mt-4"
           onInput={async (e) => {
             const prompt = e.currentTarget.value;
             const startTime = performance.now();
