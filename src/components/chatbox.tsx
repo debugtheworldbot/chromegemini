@@ -6,17 +6,16 @@ import { Button } from "./ui/button";
 import { Chat, currentChatAtom, historyAtom } from "@/lib/store";
 import { useAtom } from "jotai";
 import { useCheckAI } from "@/hooks/use-check-ai";
-import { Languages, Loader, SquarePen, StepForward } from "lucide-react";
+import { Loader, SquarePen } from "lucide-react";
 import { ErrorModal } from "./errorModal";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { LanguageBox } from "./languageBox";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Textarea } from "./ui/textarea";
 
 declare global {
@@ -29,7 +28,6 @@ export default function ChatBox() {
   const [fullHistory, saveChatHistory] = useAtom(historyAtom);
   const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useAtom(currentChatAtom);
-  const [lang, setLang] = useState("");
   const submitRef = useRef<HTMLButtonElement>(null);
   const lastMsgRef = useRef<HTMLSpanElement>(null);
 
@@ -119,26 +117,18 @@ export default function ChatBox() {
             </div>
           ) : (
             <div className="flex-1 flex gap-4 justify-center items-center md:min-w-[800px]">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex gap-2">
-                    Translate language
-                    <Languages />
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex items-center gap-2">
-                  <LanguageBox onChange={(lang) => setLang(lang)} />
-                  <Button
-                    onClick={() => {
-                      setInputValue(`translate to ${lang}: \n`);
-                    }}
-                    variant="outline"
-                    size="icon"
-                  >
-                    <StepForward />
-                  </Button>
-                </CardContent>
-              </Card>
+              <h3>
+                <p className="flex gap-4 mb-4 text-2xl font-medium">
+                  <Image
+                    src="/gemini.svg"
+                    width={24}
+                    height={24}
+                    alt="gemini icon"
+                  />
+                  Gemini Nano
+                </p>
+                How can I help you today?
+              </h3>
             </div>
           )}
           <footer className="sticky bottom-0 pb-4 rounded bg-white/50 backdrop-blur pt-2">
