@@ -27,17 +27,17 @@ declare global {
 
 export default function ChatBox() {
   const [fullHistory, saveChatHistory] = useAtom(historyAtom);
-  const [endMessage, setEndMessage] = useState<null | HTMLDivElement>(null);
   const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useAtom(currentChatAtom);
   const [lang, setLang] = useState("");
   const submitRef = useRef<HTMLButtonElement>(null);
+  const lastMsgRef = useRef<HTMLSpanElement>(null);
 
   const { isAI, model, error } = useCheckAI();
 
   useEffect(() => {
-    endMessage?.scrollIntoView({ behavior: "smooth" });
-  }, [endMessage]);
+    lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatHistory, isAI]);
 
   const onReset = () => {
     if (
@@ -103,13 +103,7 @@ export default function ChatBox() {
                   );
                 } else {
                   return (
-                    <div
-                      className="mb-2"
-                      key={chat.id}
-                      ref={(el) => {
-                        setEndMessage(el);
-                      }}
-                    >
+                    <div className="mb-2" key={chat.id}>
                       {chat.text ? (
                         <div className="prose bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">
                           <Markdown>{chat.text}</Markdown>
@@ -121,6 +115,7 @@ export default function ChatBox() {
                   );
                 }
               })}
+              <span ref={lastMsgRef} />
             </div>
           ) : (
             <div className="flex-1 flex gap-4 justify-center items-center md:min-w-[800px]">
@@ -178,6 +173,7 @@ export default function ChatBox() {
                     h[h.length - 1].text = chunk;
                     return [...h];
                   });
+                  lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
                 }
               }}
               onReset={onReset}
