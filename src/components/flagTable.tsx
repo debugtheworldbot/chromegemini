@@ -26,7 +26,7 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
         <AccordionTrigger>Demo</AccordionTrigger>
         <AccordionContent>
           <video
-            src="https://chromeai.org/prod.mp4"
+            src="https://assets.chromeai.org/prod.mp4"
             autoPlay
             loop
             height={360}
