@@ -1,20 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import { Chat, currentChatAtom, historyAtom } from "@/lib/store";
 import { useAtom } from "jotai";
 import { useCheckAI } from "@/hooks/use-check-ai";
-import {
-  CircleX,
-  Languages,
-  Loader,
-  MailPlus,
-  SquarePen,
-  StepForward,
-} from "lucide-react";
+import { Languages, Loader, SquarePen, StepForward } from "lucide-react";
 import { ErrorModal } from "./errorModal";
 import Link from "next/link";
 import {
@@ -24,7 +16,6 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import { LanguageBox } from "./languageBox";
-import { Close } from "@radix-ui/react-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Textarea } from "./ui/textarea";
 
@@ -40,6 +31,7 @@ export default function ChatBox() {
   const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useAtom(currentChatAtom);
   const [lang, setLang] = useState("");
+  const submitRef = useRef<HTMLButtonElement>(null);
 
   const { isAI, model, error } = useCheckAI();
 
@@ -218,12 +210,19 @@ export default function ChatBox() {
                       setInputValue(e.target.value as string);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      submitRef.current?.click();
+                    }
+                  }}
                   disabled={!isAI}
                 />
                 <Button
                   className="absolute right-2 bottom-2"
                   type="submit"
                   size="sm"
+                  ref={submitRef}
                   disabled={!isAI}
                 >
                   Send
