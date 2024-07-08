@@ -32,3 +32,10 @@ export async function checkEnv() {
     );
   }
 }
+
+export const convertTitleToPath = (title: string) => {
+  return title.split(" ").join("_");
+};
+export const convertParamToTitle = (param: string) => {
+  return param.split("_").join(" ");
+};
