@@ -56,6 +56,8 @@ export default function ChatBox() {
     setInputValue("");
   };
 
+  const isComposing = useRef(false);
+
   return (
     <div className="w-full flex-1 flex flex-col">
       <ErrorModal error={error} />
@@ -196,8 +198,18 @@ export default function ChatBox() {
                       setInputValue(e.target.value as string);
                     }
                   }}
+                  onCompositionStart={() => {
+                    isComposing.current = true;
+                  }}
+                  onCompositionEnd={() => {
+                    isComposing.current = false;
+                  }}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter" && !e.shiftKey) {
+                    if (
+                      e.key === "Enter" &&
+                      !e.shiftKey &&
+                      !isComposing.current
+                    ) {
                       e.preventDefault();
                       submitRef.current?.click();
                     }
