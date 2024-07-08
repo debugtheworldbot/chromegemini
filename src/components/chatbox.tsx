@@ -1,22 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Markdown from "react-markdown";
-import { Button } from "./ui/button";
-import { Chat, currentChatAtom, historyAtom } from "@/lib/store";
+import { currentChatAtom } from "@/lib/store";
 import { useAtom } from "jotai";
 import { useCheckAI } from "@/hooks/use-check-ai";
-import { Loader, SquarePen } from "lucide-react";
+import { Loader } from "lucide-react";
 import { ErrorModal } from "./errorModal";
-import Link from "next/link";
 import Image from "next/image";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
-import { Textarea } from "./ui/textarea";
+import InputBar from "./inputBar";
 
 declare global {
   interface Window {
@@ -25,10 +17,7 @@ declare global {
 }
 
 export default function ChatBox() {
-  const [fullHistory, saveChatHistory] = useAtom(historyAtom);
-  const [inputValue, setInputValue] = useState("");
-  const [chatHistory, setChatHistory] = useAtom(currentChatAtom);
-  const submitRef = useRef<HTMLButtonElement>(null);
+  const [chatHistory] = useAtom(currentChatAtom);
   const lastMsgRef = useRef<HTMLSpanElement>(null);
 
   const { isAI, model, error } = useCheckAI();
@@ -36,27 +25,6 @@ export default function ChatBox() {
   useEffect(() => {
     lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatHistory, isAI]);
-
-  const onReset = () => {
-    if (
-      chatHistory.length &&
-      !fullHistory.find(
-        (h) => h.id === chatHistory[chatHistory.length - 1].createdAt,
-      )
-    ) {
-      saveChatHistory((h) => [
-        ...h,
-        {
-          id: chatHistory[chatHistory.length - 1].createdAt,
-          chatHistory: chatHistory,
-        },
-      ]);
-    }
-    setChatHistory([]);
-    setInputValue("");
-  };
-
-  const isComposing = useRef(false);
 
   return (
     <div className="w-full flex-1 flex flex-col">
@@ -133,113 +101,7 @@ export default function ChatBox() {
               </h3>
             </div>
           )}
-          <footer className="sticky bottom-0 pb-4 rounded bg-white/50 backdrop-blur pt-2">
-            <form
-              className="flex w-full items-center gap-4 px-2 mt-auto"
-              onSubmit={async (form) => {
-                form.preventDefault();
-                if (inputValue === "") {
-                  return;
-                }
-                const id = chatHistory.length + 1;
-                const input: Chat = {
-                  id,
-                  role: "user",
-                  text: inputValue,
-                  createdAt: new Date().toISOString(),
-                };
-                const res: Chat = {
-                  id: id + 1,
-                  role: "assistant",
-                  text: "",
-                  createdAt: new Date().toISOString(),
-                };
-
-                chatHistory.push(input);
-                chatHistory.push(res);
-                const aiReplayStream = await model?.promptStreaming(inputValue);
-                setInputValue("");
-                setChatHistory(chatHistory);
-                for await (const chunk of aiReplayStream) {
-                  setChatHistory((h) => {
-                    h[h.length - 1].text = chunk;
-                    return [...h];
-                  });
-                  lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              onReset={onReset}
-            >
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      type="reset"
-                      className="p-2"
-                      disabled={!isAI}
-                      variant="outline"
-                    >
-                      <SquarePen />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Create new chat</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              <div className="w-full relative">
-                <Textarea
-                  placeholder="Chat to Chrome on-device AI locally, no internet connected."
-                  name="text"
-                  className="w-full pr-20"
-                  value={inputValue}
-                  onInput={(e) => {
-                    if ("value" in e.target) {
-                      setInputValue(e.target.value as string);
-                    }
-                  }}
-                  onCompositionStart={() => {
-                    isComposing.current = true;
-                  }}
-                  onCompositionEnd={() => {
-                    isComposing.current = false;
-                  }}
-                  onKeyDown={(e) => {
-                    if (
-                      e.key === "Enter" &&
-                      !e.shiftKey &&
-                      !isComposing.current
-                    ) {
-                      e.preventDefault();
-                      submitRef.current?.click();
-                    }
-                  }}
-                  disabled={!isAI}
-                />
-                <Button
-                  className="absolute right-2 bottom-2"
-                  type="submit"
-                  size="sm"
-                  ref={submitRef}
-                  disabled={!isAI}
-                >
-                  Send
-                </Button>
-              </div>
-            </form>
-
-            <p className="text-center mt-2 text-zinc-600 font-medium mx-2">
-              Compare the results among ChromeAI, ChatGPT, Claude, and Llama in{" "}
-              <Link
-                className="underline"
-                href="https://chathub.gg/?via=ChromeAIorg"
-                target="_blank"
-              >
-                ChatHub
-              </Link>
-              .
-            </p>
-          </footer>
+          <InputBar model={model} />
         </>
       )}
     </div>
