@@ -122,11 +122,11 @@ export default function InputBar({ model }: { model: any }) {
         </div>
       </form>
 
-      <p className="text-center mt-2 text-zinc-600 font-medium mx-2">
+      <p className="text-center mt-2 text-zinc-600 font-medium mx-2 text-sm">
         Compare the results among ChromeAI, ChatGPT, Claude, and Llama in{" "}
         <Link
           className="underline"
-          href="https://chathub.gg/?via=ChromeAIorg"
+          href="https://app.chathub.gg/?via=ChromeAIorg"
           target="_blank"
         >
           ChatHub

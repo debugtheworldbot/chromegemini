@@ -98,7 +98,7 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
           Compare the results among ChromeAI, ChatGPT, Claude, and Llama in{" "}
           <Link
             className="underline"
-            href="https://chathub.gg/?via=ChromeAIorg"
+            href="https://app.chathub.gg/?via=ChromeAIorg"
             target="_blank"
           >
             ChatHub
