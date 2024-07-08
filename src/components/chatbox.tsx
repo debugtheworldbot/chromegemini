@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import { currentChatAtom } from "@/lib/store";
 import { useAtom } from "jotai";
@@ -9,6 +9,7 @@ import { Loader } from "lucide-react";
 import { ErrorModal } from "./errorModal";
 import Image from "next/image";
 import InputBar from "./inputBar";
+import Presets from "./presets";
 
 declare global {
   interface Window {
@@ -19,6 +20,7 @@ declare global {
 export default function ChatBox() {
   const [chatHistory] = useAtom(currentChatAtom);
   const lastMsgRef = useRef<HTMLSpanElement>(null);
+  const [preset, setPreset] = useState("");
 
   const { isAI, model, error } = useCheckAI();
 
@@ -86,22 +88,22 @@ export default function ChatBox() {
               <span ref={lastMsgRef} />
             </div>
           ) : (
-            <div className="flex-1 flex gap-4 justify-center items-center md:min-w-[800px]">
+            <div className="flex-1 flex flex-col gap-4 justify-center items-center md:min-w-[800px]">
               <h3>
                 <p className="flex gap-4 mb-4 text-2xl font-medium">
                   <Image
                     src="/gemini.svg"
-                    width={24}
-                    height={24}
+                    width={30}
+                    height={30}
                     alt="gemini icon"
                   />
                   Gemini Nano
                 </p>
-                How can I help you today?
               </h3>
+              <Presets onSelect={(p) => setPreset(p)} />
             </div>
           )}
-          <InputBar model={model} />
+          <InputBar model={model} preset={preset} />
         </>
       )}
     </div>

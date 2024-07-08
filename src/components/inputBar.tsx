@@ -7,18 +7,28 @@ import {
 } from "./ui/tooltip";
 import { Textarea } from "./ui/textarea";
 import { useAtom } from "jotai";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { SquarePen } from "lucide-react";
 import Link from "next/link";
 
-export default function InputBar({ model }: { model: any }) {
+export default function InputBar({
+  model,
+  preset,
+}: {
+  model: any;
+  preset: string;
+}) {
   const [chatHistory, setChatHistory] = useAtom(currentChatAtom);
   const [inputValue, setInputValue] = useState("");
   const [fullHistory, saveChatHistory] = useAtom(historyAtom);
   const submitRef = useRef<HTMLButtonElement>(null);
   const lastMsgRef = useRef<HTMLSpanElement>(null);
   const isComposing = useRef(false);
+
+  useEffect(() => {
+    setInputValue(preset);
+  }, [preset]);
 
   const onReset = () => {
     if (
