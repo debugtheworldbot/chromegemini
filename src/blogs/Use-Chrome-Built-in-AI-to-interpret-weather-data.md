@@ -6,9 +6,9 @@ Chrome developers have recently showcased an exciting new feature that demonstra
 
 Check out the video demonstration shared by the Chrome Development team:
 
-<video src="https://video.twimg.com/amplify_video/1807817043044974592/vid/avc1/720x1156/WKScEI4eVopJ_h5S.mp4" controls></video>
-
 [Original tweet by @ChromiumDev](https://x.com/ChromiumDev/status/1807817071700447306)
+
+[Demo video](https://video.twimg.com/amplify_video/1807817043044974592/vid/avc1/720x1156/WKScEI4eVopJ_h5S.mp4)
 
 ## Key Features
 
