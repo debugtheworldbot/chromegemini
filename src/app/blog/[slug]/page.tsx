@@ -6,21 +6,17 @@ import rehypeRaw from "rehype-raw";
 export const dynamicParams = false;
 export async function generateStaticParams() {
   const list = await fs.readdir("./src/blogs");
-  const result = await Promise.all(
-    list.map(async (l) => {
-      const path = encodeURIComponent(l.replace(".md", ""));
-      return {
-        slug: path,
-      };
-    }),
-  );
+  const result = list.map((l) => {
+    const path = l.replace(".md", "");
+    return {
+      slug: path,
+    };
+  });
   return result;
 }
 const getBlogByPath = async (path: string) => {
-  const file = await fs.readFile(
-    "./src/blogs/" + decodeURIComponent(path) + ".md",
-    "utf-8",
-  );
+  const p = decodeURIComponent(path);
+  const file = await fs.readFile("./src/blogs/" + p + ".md", "utf-8");
   return file;
 };
 
