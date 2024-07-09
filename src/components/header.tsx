@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import InstantDialog from "./instantDialog";
-import { Chrome, Github, CircleHelp } from "lucide-react";
+import { Chrome, Github, CircleHelp, BookOpenText } from "lucide-react";
 import Image from "next/image";
 import { SettingsDialog } from "./settingsDialog";
 
@@ -44,6 +44,11 @@ export default function Header() {
         <Link href="/help">
           <Button size="icon" variant="ghost">
             <CircleHelp />
+          </Button>
+        </Link>
+        <Link href="/blog">
+          <Button size="icon" variant="ghost">
+            <BookOpenText />
           </Button>
         </Link>
         <Link href="https://discord.gg/ZrF4kjUBhJ" target="_blank">
