@@ -16,16 +16,10 @@ export const useCheckAI = () => {
   const [error, setError] = useState<null | string>(null);
 
   const updateModel = useCallback(async () => {
-    const model =
-      settings.model === "text"
-        ? await window.ai.createTextSession({
-          topK: settings.topK,
-          temperature: settings.temperature,
-        })
-        : await window.ai.createGenericSession({
-          topK: settings.topK,
-          temperature: settings.temperature,
-        });
+    const model = await window.ai.createTextSession({
+      topK: settings.topK,
+      temperature: settings.temperature,
+    });
     setModel(model);
   }, [settings]);
   const updateIsAI = useCallback(async () => {
