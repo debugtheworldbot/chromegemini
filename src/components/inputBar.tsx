@@ -50,7 +50,7 @@ export default function InputBar({
   };
 
   return (
-    <footer className="sticky bottom-0 pb-4 rounded bg-white/50 backdrop-blur pt-2">
+    <footer className="sticky bottom-0 pb-4 sm:pb-8 rounded bg-white pt-2">
       <form
         className="flex w-full items-center gap-4 px-2 mt-auto"
         onSubmit={async (form) => {
@@ -131,18 +131,6 @@ export default function InputBar({
           </Button>
         </div>
       </form>
-
-      <p className="text-center mt-2 text-zinc-600 font-medium mx-2 text-sm">
-        Compare the results among ChromeAI, ChatGPT, Claude, and Llama in{" "}
-        <Link
-          className="underline"
-          href="https://app.chathub.gg/?via=ChromeAIorg"
-          target="_blank"
-        >
-          ChatHub
-        </Link>
-        .
-      </p>
     </footer>
   );
 }

@@ -10,6 +10,7 @@ import { ErrorModal } from "./errorModal";
 import Image from "next/image";
 import InputBar from "./inputBar";
 import Presets from "./presets";
+import Link from "next/link";
 
 declare global {
   interface Window {
@@ -28,6 +29,10 @@ export default function ChatBox() {
     lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatHistory, isAI]);
 
+  const hasLastRes =
+    chatHistory[chatHistory.length - 1] &&
+    chatHistory[chatHistory.length - 1]?.role === "assistant" &&
+    !!chatHistory[chatHistory.length - 1]?.text;
   return (
     <div className="w-full flex-1 flex flex-col">
       <ErrorModal error={error} />
@@ -65,7 +70,7 @@ export default function ChatBox() {
               {chatHistory.map((chat) => {
                 if (chat.role === "user") {
                   return (
-                    <div className="mb-2 text-right" key={chat.id}>
+                    <div className="mb-4 text-right" key={chat.id}>
                       <div className="prose bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">
                         <Markdown>{chat.text}</Markdown>
                       </div>
@@ -73,18 +78,34 @@ export default function ChatBox() {
                   );
                 } else {
                   return (
-                    <div className="mb-2" key={chat.id}>
+                    <div className="mb-4 flex gap-4 py-2" key={chat.id}>
+                      <Image
+                        src="/gemini.svg"
+                        className="self-start"
+                        width={30}
+                        height={30}
+                        alt="gemini icon"
+                      />
                       {chat.text ? (
-                        <div className="prose bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">
+                        <div className="prose inline-block">
                           <Markdown>{chat.text}</Markdown>
                         </div>
                       ) : (
-                        <Loader className="animate-spin" />
+                        <Loader size={30} className="animate-spin" />
                       )}
                     </div>
                   );
                 }
               })}
+              {hasLastRes && (
+                <Link
+                  className="text-gray-700 rounded-lg bg-slate-100 px-4 py-2 ml-12 -mt-2 inline-flex"
+                  href="https://app.chathub.gg/?via=ChromeAIorg"
+                  target="_blank"
+                >
+                  👉 Compare with ChatGPT at ChatHub
+                </Link>
+              )}
               <span ref={lastMsgRef} />
             </div>
           ) : (

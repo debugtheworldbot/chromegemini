@@ -9,7 +9,7 @@ import { SettingsDialog } from "./settingsDialog";
 
 export default function Header() {
   return (
-    <header className="sticky p-4 top-0 bg-white/50 backdrop-blur flex justify-between flex-col sm:flex-row gap-2">
+    <header className="sticky px-4 py-2 top-0 bg-white/50 backdrop-blur flex justify-between flex-col sm:flex-row gap-2">
       <div className="min-w-0 md:ml-16">
         <Image
           src="/logo.png"
