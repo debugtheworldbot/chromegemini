@@ -8,7 +8,7 @@ export async function generateStaticParams() {
   const list = await fs.readdir("./src/blogs");
   const result = await Promise.all(
     list.map(async (l) => {
-      const path = l.replace(".md", "");
+      const path = encodeURIComponent(l.replace(".md", ""));
       return {
         slug: path,
       };
@@ -17,7 +17,10 @@ export async function generateStaticParams() {
   return result;
 }
 const getBlogByPath = async (path: string) => {
-  const file = await fs.readFile("./src/blogs/" + path + ".md", "utf-8");
+  const file = await fs.readFile(
+    "./src/blogs/" + decodeURIComponent(path) + ".md",
+    "utf-8",
+  );
   return file;
 };
 
