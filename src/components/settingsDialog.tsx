@@ -75,52 +75,52 @@ export const SettingsDialog = () => {
             className="grid w-full items-start gap-6"
           >
             <fieldset className="grid gap-6 rounded-lg">
-              <FormField
-                control={form.control}
-                name="model"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Model</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger
-                          id="model"
-                          className="items-start [&_[data-description]]:hidden"
-                        >
-                          <SelectValue placeholder="Select a model" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="generic">
-                          <div className="flex items-start gap-3 text-muted-foreground">
-                            <div>
-                              Gemini Nano{" "}
-                              <span className="font-medium text-foreground">
-                                Generic
-                              </span>
-                            </div>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="text">
-                          <div className="flex items-start gap-3 text-muted-foreground">
-                            <div>
-                              Gemini Nano{" "}
-                              <span className="font-medium text-foreground">
-                                Text
-                              </span>
-                            </div>
-                          </div>
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormDescription />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {/* <FormField */}
+              {/*   control={form.control} */}
+              {/*   name="model" */}
+              {/*   render={({ field }) => ( */}
+              {/*     <FormItem> */}
+              {/*       <FormLabel>Model</FormLabel> */}
+              {/*       <Select */}
+              {/*         onValueChange={field.onChange} */}
+              {/*         defaultValue={field.value} */}
+              {/*       > */}
+              {/*         <FormControl> */}
+              {/*           <SelectTrigger */}
+              {/*             id="model" */}
+              {/*             className="items-start [&_[data-description]]:hidden" */}
+              {/*           > */}
+              {/*             <SelectValue placeholder="Select a model" /> */}
+              {/*           </SelectTrigger> */}
+              {/*         </FormControl> */}
+              {/*         <SelectContent> */}
+              {/*           <SelectItem value="generic"> */}
+              {/*             <div className="flex items-start gap-3 text-muted-foreground"> */}
+              {/*               <div> */}
+              {/*                 Gemini Nano{" "} */}
+              {/*                 <span className="font-medium text-foreground"> */}
+              {/*                   Generic */}
+              {/*                 </span> */}
+              {/*               </div> */}
+              {/*             </div> */}
+              {/*           </SelectItem> */}
+              {/*           <SelectItem value="text"> */}
+              {/*             <div className="flex items-start gap-3 text-muted-foreground"> */}
+              {/*               <div> */}
+              {/*                 Gemini Nano{" "} */}
+              {/*                 <span className="font-medium text-foreground"> */}
+              {/*                   Text */}
+              {/*                 </span> */}
+              {/*               </div> */}
+              {/*             </div> */}
+              {/*           </SelectItem> */}
+              {/*         </SelectContent> */}
+              {/*       </Select> */}
+              {/*       <FormDescription /> */}
+              {/*       <FormMessage /> */}
+              {/*     </FormItem> */}
+              {/*   )} */}
+              {/* /> */}
               <FormField
                 control={form.control}
                 name="temperature"
