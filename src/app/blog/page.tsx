@@ -26,7 +26,7 @@ const getBlogList = async () => {
     const title = path.split("-").join(" ");
     return {
       title,
-      path: encodeURIComponent(path),
+      path: path,
     };
   });
 
