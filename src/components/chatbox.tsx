@@ -60,7 +60,7 @@ export default function ChatBox() {
           {chatHistory.length > 0 ? (
             <div
               id="chatbox"
-              className="p-4 overflow-y-auto flex-1 md:min-w-[800px]"
+              className="p-4 overflow-y-auto flex-1 md:w-[800px]"
             >
               {chatHistory.map((chat) => {
                 if (chat.role === "user") {
@@ -88,7 +88,7 @@ export default function ChatBox() {
               <span ref={lastMsgRef} />
             </div>
           ) : (
-            <div className="flex-1 flex flex-col gap-4 justify-center items-center md:min-w-[800px]">
+            <div className="flex-1 flex flex-col gap-4 justify-center items-center md:w-[800px]">
               <h3>
                 <p className="flex gap-4 mb-4 text-2xl font-medium">
                   <Image
