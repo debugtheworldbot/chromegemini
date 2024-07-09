@@ -58,9 +58,12 @@ This project is based on [chromeai](https://github.com/lightning-joyce/chromeai)
 The original project is licensed under the MIT License. See the LICENSE file for more details.
 
 ## More Chrome AI project
-
-- **Chrome official example** : [Using Chrome AI to describe the weathe](https://x.com/ChromiumDev/status/1807817071700447306)
-- **@pylthon** : [Use Chrome AI capabilities in the Chrome extension, select web page content and summarize it](https://x.com/pylthon/status/1806304233043501561)、[@varunshenoy\_](https://x.com/varunshenoy_/status/1808199306828198214)
-- **@shivam_chauhan0** : [Help you write Twitter comment content](https://x.com/shivam_chauhan0/status/1807829573679435791)
-- **@webml-demo** : [Offline summary of local document content](https://webml-demo.vercel.app/?provider=chrome_ai)
-- **@mortenjust** : [Email writing assistant](https://x.com/mortenjust/status/1808093127976079805)
+ 
+- [Generate DANK Replies with Chrome Built in AI](https://chromeai.org/blog/Generate-DANK-Replies-with-Chrome-Built-in-AI)
+- [Gmail Plugin for Managers](https://chromeai.org/blog/Gmail-Plugin-for-Managers)
+- [LangChain Integrates ChromeAI for On Device AI Applications](https://chromeai.org/blog/LangChain-Integrates-ChromeAI-for-On-Device-AI-Applications)
+- [Offline Document Chat with Chrome Built in AI](https://chromeai.org/blog/Offline-Document-Chat-with-Chrome-Built-in-AI)
+- [Summarize Selected Text with Chrome Built in AI](https://chromeai.org/blog/Summarize-Selected-Text-with-Chrome-Built-in-AI)
+- [Use Chrome Built in AI to interpret weather data](https://chromeai.org/blog/Use-Chrome-Built-in-AI-to-interpret-weather-data)
+- [VoiceAI Transcriber with Whisper and Chrome AI](https://chromeai.org/blog/VoiceAI-Transcriber-with-Whisper-and-Chrome-AI)
+- [Web Distiller AI: Summarize Web Pages with Chrome's Built in AI](https://chromeai.org/blog/Web-Distiller-AI-Summarize-Web-Pages-with-Chrome's-Built-in-AI)
