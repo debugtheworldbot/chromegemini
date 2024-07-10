@@ -66,4 +66,8 @@ The original project is licensed under the MIT License. See the LICENSE file for
 - [Summarize Selected Text with Chrome Built in AI](https://chromeai.org/blog/Summarize-Selected-Text-with-Chrome-Built-in-AI)
 - [Use Chrome Built in AI to interpret weather data](https://chromeai.org/blog/Use-Chrome-Built-in-AI-to-interpret-weather-data)
 - [VoiceAI Transcriber with Whisper and Chrome AI](https://chromeai.org/blog/VoiceAI-Transcriber-with-Whisper-and-Chrome-AI)
-- [Web Distiller AI: Summarize Web Pages with Chrome's Built in AI](https://chromeai.org/blog/Web-Distiller-AI-Summarize-Web-Pages-with-Chrome's-Built-in-AI)
+- [Web Distiller AI: Summarize Web Pages with Chrome's Built in AI](https://chromeai.org/blog/Web-Distiller-AI:-Summarize-Web-Pages-with-Chrome's-Built-in-AI)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=debugtheworldbot/chromegemini&type=Date)](https://star-history.com/#debugtheworldbot/chromegemini&Date)
