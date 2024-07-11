@@ -68,5 +68,4 @@ Please note that Chrome Built -in AI is currently a work in progress.Features an
 
 ## Feedback and Support
 
-For additional help or to provide feedback, please join our Discord community: 
-[https://discord.gg/ZrF4kjUBhJ](https://discord.gg/ZrF4kjUBhJ)`;
+For additional help or to provide feedback, please join our [Discord community](https://discord.gg/ZrF4kjUBhJ)`;

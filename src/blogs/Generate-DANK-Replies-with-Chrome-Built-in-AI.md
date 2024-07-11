@@ -1,3 +1,5 @@
+# Generate DANK Replies with Chrome Built-in AI
+
 Get ready to up your Twitter game! Chrome's upcoming `window.ai` API is opening up a world of possibilities, including the ability to generate witty and engaging replies directly in your browser – all thanks to the power of built-in AI.
 
 😂 Developer Shivam Chauahn recently shared an impressive demo of a Chrome extension that uses a local Gemini Nano model to craft humorous responses to tweets. [Link to X post when publicly available]
@@ -14,8 +16,8 @@ Get ready to up your Twitter game! Chrome's upcoming `window.ai` API is opening 
 
 **Why This is a Game-Changer:**
 
-* **Effortless Engagement:** No more struggling to come up with the perfect response! AI makes staying active and engaging on social media a breeze.
-* **Next-Level Humor:** Gemini Nano's ability to understand nuances in language allows it to generate replies that are genuinely funny and relevant.
-* **Privacy-Focused:** Because the AI model runs locally in the browser, users' data remains protected.
+- **Effortless Engagement:** No more struggling to come up with the perfect response! AI makes staying active and engaging on social media a breeze.
+- **Next-Level Humor:** Gemini Nano's ability to understand nuances in language allows it to generate replies that are genuinely funny and relevant.
+- **Privacy-Focused:** Because the AI model runs locally in the browser, users' data remains protected.
 
 This project provides a glimpse into the exciting future of AI-powered creativity. As Chrome's `window.ai` API becomes more widely available, we can expect a wave of innovative extensions that enhance our online interactions and unlock new forms of self-expression.

@@ -39,7 +39,6 @@ export default async function page({ params }: { params: { slug: string } }) {
   const content = await getBlogByPath(params.slug);
   return (
     <article className="w-full max-w-3xl mx-auto prose px-4 py-6">
-      <h1>{decodeURIComponent(params.slug).replace(/-/g, " ")}</h1>
       <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
     </article>
   );

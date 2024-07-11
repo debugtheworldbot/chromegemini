@@ -1,4 +1,4 @@
-### Summarize Web Pages Instantly with Web Distiller AI, a Chrome Extension Powered by Gemini Nano
+# Summarize Web Pages Instantly with Web Distiller AI, a Chrome Extension Powered by Gemini Nano
 
 Tired of lengthy articles and want to grasp the key points quickly? Web Distiller AI is a Chrome extension that leverages the power of Chrome's built-in Gemini Nano model to provide concise and accurate summaries of web pages, all without sending your data to external servers.
 
@@ -12,10 +12,10 @@ Web Distiller AI prioritizes user privacy by performing all summarization tasks 
 
 #### Key Features:
 
-* **One-Click Summarization:** Simply click the extension icon while browsing to generate a summary of the current web page.
-* **Markdown Output:** Summaries are presented in a clean and readable markdown format, ready to be copied and pasted into your notes or documents.
-* **Translation Options:** Choose to have the summary translated into English or Japanese for enhanced accessibility.
-* **Powered by Gemini Nano:** Utilizes the cutting-edge capabilities of Chrome's built-in Gemini Nano model for accurate and efficient summarization.
+- **One-Click Summarization:** Simply click the extension icon while browsing to generate a summary of the current web page.
+- **Markdown Output:** Summaries are presented in a clean and readable markdown format, ready to be copied and pasted into your notes or documents.
+- **Translation Options:** Choose to have the summary translated into English or Japanese for enhanced accessibility.
+- **Powered by Gemini Nano:** Utilizes the cutting-edge capabilities of Chrome's built-in Gemini Nano model for accurate and efficient summarization.
 
 #### How it Works:
 

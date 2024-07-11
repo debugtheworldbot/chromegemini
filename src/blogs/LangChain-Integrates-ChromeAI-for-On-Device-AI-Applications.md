@@ -1,4 +1,4 @@
-### LangChain Unlocks the Power of Chrome's Built-in AI with New Component
+# LangChain Unlocks the Power of Chrome's Built-in AI with New Component
 
 The LangChain JavaScript library has taken a significant step towards empowering developers to build AI-powered applications that run directly in the browser. With the introduction of the `ChromeAI` component, developers can now seamlessly integrate Chrome's built-in AI capabilities into their JavaScript projects. This integration opens up exciting possibilities for creating faster, more private, and internet-independent AI applications.
 
@@ -8,9 +8,9 @@ ChromeAI leverages the power of Gemini Nano, Google's on-device machine learning
 
 #### Key Advantages of LangChain's ChromeAI Integration:
 
-* **Enhanced Privacy:** With on-device processing, user data never leaves their device, addressing growing concerns about data privacy and security.
-* **Offline Functionality:** Applications built with ChromeAI can function seamlessly even without an internet connection, making them ideal for use cases where connectivity is limited or unreliable.
-* **Faster Response Times:** On-device AI processing eliminates the latency associated with network requests, leading to significantly faster response times and a smoother user experience.
+- **Enhanced Privacy:** With on-device processing, user data never leaves their device, addressing growing concerns about data privacy and security.
+- **Offline Functionality:** Applications built with ChromeAI can function seamlessly even without an internet connection, making them ideal for use cases where connectivity is limited or unreliable.
+- **Faster Response Times:** On-device AI processing eliminates the latency associated with network requests, leading to significantly faster response times and a smoother user experience.
 
 #### Getting Started with ChromeAI in LangChain
 
@@ -31,7 +31,6 @@ const response = await model.invoke("Write me a short poem please");
 // Log the AI-generated response
 console.log(response);
 ```
-
 
 #### Streaming Capabilities for Real-Time Interactions
 

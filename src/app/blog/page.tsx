@@ -47,7 +47,7 @@ export default async function page() {
           {list.map((l, index) => (
             <li key={index} className="mb-8">
               <Link className="block" href={`/blog/${l.path}`}>
-                <h1 className="underline text-2xl">{l.title}</h1>
+                <h2 className="underline text-2xl">{l.title}</h2>
               </Link>
             </li>
           ))}
