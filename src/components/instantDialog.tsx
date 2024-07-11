@@ -13,7 +13,7 @@ import Markdown from "react-markdown";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useCheckAI } from "@/hooks/use-check-ai";
-import { Loader } from "lucide-react";
+import { Loader, Zap } from "lucide-react";
 
 export default function InstantDialog() {
   const [output, setOutput] = useState("");
@@ -24,7 +24,9 @@ export default function InstantDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button disabled={!isAI}>Instant Mode</Button>
+        <Button size="icon" disabled={!isAI}>
+          <Zap />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
