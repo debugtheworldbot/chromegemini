@@ -2,6 +2,7 @@ import React from "react";
 import Markdown from "react-markdown";
 import { promises as fs } from "fs";
 import rehypeRaw from "rehype-raw";
+import { Metadata, ResolvingMetadata } from "next";
 
 export const dynamicParams = false;
 export async function generateStaticParams() {
@@ -19,6 +20,20 @@ const getBlogByPath = async (path: string) => {
   const file = await fs.readFile("./src/blogs/" + p + ".md", "utf-8");
   return file;
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const title = params.slug;
+
+  const content = await getBlogByPath(params.slug);
+  return {
+    title: title + " | ChromeAI.org",
+    description: content.substring(0, 100) + "...",
+  };
+}
 
 export default async function page({ params }: { params: { slug: string } }) {
   const content = await getBlogByPath(params.slug);

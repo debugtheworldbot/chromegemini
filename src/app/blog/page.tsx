@@ -3,7 +3,12 @@ import React from "react";
 import { promises as fs } from "fs";
 import { Button } from "@/components/ui/button";
 import { Chrome, Github } from "lucide-react";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Blog | ChromeAI.org",
+  description: "Chromeai.org's blog list page, powered by Next.js",
+};
 export default async function page() {
   const list = await getBlogList();
   return (
