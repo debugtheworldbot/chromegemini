@@ -99,7 +99,7 @@ export default function ChatBox() {
               })}
               {hasLastRes && (
                 <Link
-                  className="text-gray-700 rounded-lg bg-slate-100 px-4 py-2 ml-12 -mt-2 inline-flex"
+                  className="text-gray-500 rounded-lg bg-slate-100 px-4 py-2 ml-12 -mt-2 inline-flex text-sm"
                   href="https://app.chathub.gg/?via=ChromeAIorg"
                   target="_blank"
                 >
