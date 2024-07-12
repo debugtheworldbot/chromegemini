@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import InstantDialog from "./instantDialog";
 import { Chrome, Github, CircleHelp, BookOpenText, Coffee } from "lucide-react";
 import Image from "next/image";

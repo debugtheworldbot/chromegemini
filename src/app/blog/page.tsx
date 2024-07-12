@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import React from "react";
 import { promises as fs } from "fs";
 import { Button } from "@/components/ui/button";
