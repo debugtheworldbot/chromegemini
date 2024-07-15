@@ -61,6 +61,11 @@ export default function RootLayout({
             crossOrigin="anonymous"
           ></script>
           <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460143338187515"
+            crossOrigin="anonymous"
+          ></script>
+          <script
             defer
             data-domain="chromeai.org"
             src="https://plausible.midway.run/js/script.js"
