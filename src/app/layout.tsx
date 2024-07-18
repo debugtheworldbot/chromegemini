@@ -55,11 +55,11 @@ export default function RootLayout({
           {children}
           <Analytics />
           <SpeedInsights />
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6794864725006505"
-            crossOrigin="anonymous"
-          ></script>
+          {/* <script */}
+          {/*   async */}
+          {/*   src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6794864725006505" */}
+          {/*   crossOrigin="anonymous" */}
+          {/* ></script> */}
           <script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460143338187515"
