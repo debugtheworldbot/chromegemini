@@ -11,7 +11,7 @@ export default function Home() {
       <main className="flex h-screen overflow-scroll flex-1 flex-col">
         <Header />
 
-        <div className="max-w-4xl h-full flex flex-col mx-auto">
+        <div className="w-full sm:w-auto max-w-4xl h-full flex flex-col mx-auto">
           <ChatBox />
         </div>
       </main>

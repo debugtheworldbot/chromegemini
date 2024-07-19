@@ -25,6 +25,7 @@ export default function InputBar({
   const submitRef = useRef<HTMLButtonElement>(null);
   const lastMsgRef = useRef<HTMLSpanElement>(null);
   const isComposing = useRef(false);
+  const [err, setErr] = useState("");
 
   useEffect(() => {
     setInputValue(preset);
@@ -51,36 +52,44 @@ export default function InputBar({
 
   return (
     <footer className="sticky bottom-0 pb-4 sm:pb-8 rounded bg-white pt-2">
+      {err && <p className="text-red-500 text-center">Error: {err}</p>}
       <form
         className="flex w-full items-center gap-4 px-2 mt-auto"
         onSubmit={async (form) => {
-          form.preventDefault();
-          if (inputValue === "") {
-            return;
-          }
-          const id = chatHistory.length + 1;
-          const input: Chat = {
-            id,
-            role: "user",
-            text: inputValue,
-            createdAt: new Date().toISOString(),
-          };
-          const res: Chat = {
-            id: id + 1,
-            role: "assistant",
-            text: "",
-            createdAt: new Date().toISOString(),
-          };
+          try {
+            form.preventDefault();
+            if (inputValue === "") {
+              return;
+            }
+            const id = chatHistory.length + 1;
+            const input: Chat = {
+              id,
+              role: "user",
+              text: inputValue,
+              createdAt: new Date().toISOString(),
+            };
+            const res: Chat = {
+              id: id + 1,
+              role: "assistant",
+              text: "",
+              createdAt: new Date().toISOString(),
+            };
 
-          setChatHistory((h) => [...h, input, res]);
-          const aiReplayStream = await model?.promptStreaming(inputValue);
-          setInputValue("");
-          for await (const chunk of aiReplayStream) {
-            setChatHistory((h) => {
-              h[h.length - 1].text = chunk;
-              return [...h];
-            });
-            lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
+            setChatHistory((h) => [...h, input, res]);
+            const aiReplayStream = await model?.promptStreaming(inputValue);
+            setInputValue("");
+            for await (const chunk of aiReplayStream) {
+              setChatHistory((h) => {
+                h[h.length - 1].text = chunk;
+                return [...h];
+              });
+              lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
+            }
+            setErr("");
+          } catch (e: any) {
+            const msg = e.message;
+            console.log(typeof e, msg);
+            setErr(msg);
           }
         }}
         onReset={onReset}

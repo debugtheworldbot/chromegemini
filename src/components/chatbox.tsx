@@ -91,7 +91,7 @@ export default function ChatBox() {
                           <Markdown>{chat.text}</Markdown>
                         </div>
                       ) : (
-                        <Loader size={30} className="animate-spin" />
+                        <Loader size={30} className="animate-spin z-[-1]" />
                       )}
                     </div>
                   );
