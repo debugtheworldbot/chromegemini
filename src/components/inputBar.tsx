@@ -59,7 +59,7 @@ export default function InputBar({
       {err && (
         <p className="text-center">
           <span className="text-red-500">Error: {err}</span>
-          Try Create a new chat?
+          Maybe create a new chat?
         </p>
       )}
       <form
