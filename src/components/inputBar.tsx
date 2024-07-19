@@ -10,15 +10,16 @@ import { useAtom } from "jotai";
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { SquarePen } from "lucide-react";
-import Link from "next/link";
+import { useCheckAI } from "@/hooks/use-check-ai";
 
 export default function InputBar({
-  model,
   preset,
+  onClear,
 }: {
-  model: any;
   preset: string;
+  onClear: () => void;
 }) {
+  const { model, updateModel } = useCheckAI();
   const [chatHistory, setChatHistory] = useAtom(currentChatAtom);
   const [inputValue, setInputValue] = useState("");
   const [fullHistory, saveChatHistory] = useAtom(historyAtom);
@@ -31,7 +32,8 @@ export default function InputBar({
     setInputValue(preset);
   }, [preset]);
 
-  const onReset = () => {
+  const onReset = async () => {
+    onClear();
     if (
       chatHistory.length &&
       !fullHistory.find(
@@ -48,15 +50,23 @@ export default function InputBar({
     }
     setChatHistory([]);
     setInputValue("");
+    await updateModel();
+    setErr("");
   };
 
   return (
     <footer className="sticky bottom-0 pb-4 sm:pb-8 rounded bg-white pt-2">
-      {err && <p className="text-red-500 text-center">Error: {err}</p>}
+      {err && (
+        <p className="text-center">
+          <span className="text-red-500">Error: {err}</span>
+          Try Create a new chat?
+        </p>
+      )}
       <form
         className="flex w-full items-center gap-4 px-2 mt-auto"
         onSubmit={async (form) => {
           try {
+            setErr("");
             form.preventDefault();
             if (inputValue === "") {
               return;

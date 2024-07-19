@@ -23,7 +23,7 @@ export default function ChatBox() {
   const lastMsgRef = useRef<HTMLSpanElement>(null);
   const [preset, setPreset] = useState("");
 
-  const { isAI, model, error } = useCheckAI();
+  const { isAI, error } = useCheckAI();
 
   useEffect(() => {
     lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -124,7 +124,7 @@ export default function ChatBox() {
               <Presets onSelect={(p) => setPreset(p)} />
             </div>
           )}
-          <InputBar model={model} preset={preset} />
+          <InputBar onClear={() => setPreset("")} preset={preset} />
         </>
       )}
     </div>

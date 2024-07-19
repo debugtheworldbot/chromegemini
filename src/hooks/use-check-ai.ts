@@ -4,6 +4,11 @@ import { useAtomValue } from "jotai";
 import { useCallback, useEffect, useState } from "react";
 
 export type AIModelAvailability = "readily" | "after-download" | "no";
+export type Modal = {
+  prompt: any;
+  promptStreaming: any;
+  destroy: () => void;
+};
 
 const checkAI = async () => {
   await checkEnv();
@@ -12,16 +17,17 @@ const checkAI = async () => {
 export const useCheckAI = () => {
   const [isAI, setIsAI] = useState<null | boolean>(null);
   const settings = useAtomValue(settingsAtom);
-  const [model, setModel] = useState<{ prompt: any; promptStreaming: any }>();
+  const [model, setModel] = useState<Modal>();
   const [error, setError] = useState<null | string>(null);
 
   const updateModel = useCallback(async () => {
-    const model = await window.ai.createTextSession({
+    const m = await window.ai.createTextSession({
       topK: settings.topK,
       temperature: settings.temperature,
     });
-    setModel(model);
-  }, [settings]);
+    setModel(m);
+  }, [settings.temperature, settings.topK]);
+
   const updateIsAI = useCallback(async () => {
     try {
       const checkAIStatus = await checkAI();
@@ -41,5 +47,5 @@ export const useCheckAI = () => {
   useEffect(() => {
     updateIsAI();
   }, [updateIsAI]);
-  return { isAI, model, error };
+  return { isAI, model, error, updateModel };
 };
