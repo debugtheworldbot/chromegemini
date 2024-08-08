@@ -8,13 +8,17 @@ import { Loader } from "lucide-react";
 import React, { useState } from "react";
 
 export default function Page() {
-  const { model, error } = useSummarize();
+  const { canSummarize, summarize, error, checking } = useSummarize();
   const [result, setResult] = useState<string>();
   const [loading, setLoading] = useState(false);
   return (
     <div className="min-h-screen w-screen">
       <Header />
-      {model ? (
+      {checking ? (
+        <p className="text-2xl font-medium flex justify-center items-center mt-12">
+          <Loader className="animate-spin mr-2" /> Checking your browser...
+        </p>
+      ) : canSummarize ? (
         <main className="flex h-screen overflow-scroll flex-1 flex-col">
           <h1 className="text-center text-4xl font-medium mt-8">
             Summarization by Gemini Nano
@@ -26,7 +30,7 @@ export default function Page() {
               const formData = new FormData(e.currentTarget);
               const input = formData.get("input") as string;
               setLoading(true);
-              const res = await model?.summarize(input);
+              const res = await summarize(input);
               setResult(res);
               setLoading(false);
             }}

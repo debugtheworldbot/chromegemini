@@ -31,29 +31,32 @@ const checkSummarize = async () => {
 };
 
 export const useSummarize = () => {
-  const [model, setModel] = useState<SummarizeModal>();
+  const [checking, setChecking] = useState(true);
+  const [canSummarize, setCanSummarize] = useState<null | boolean>(null);
   const [error, setError] = useState<null | string>(null);
 
-  const updateModel = useCallback(async () => {
-    const summarizer = await window.ai.summarizer.create();
-    setModel(summarizer);
+  const summarize = useCallback(async (input: string) => {
+    window.ai.summarizer?.destroy && (await window.ai.summarizer.destroy());
+    const summarizer: SummarizeModal = await window.ai.summarizer.create();
+    const result = await summarizer.summarize(input);
+    return result;
   }, []);
 
   const update = useCallback(async () => {
     try {
       const { canSummarize } = await checkSummarize();
-      if (canSummarize) {
-        updateModel();
-      }
+      setCanSummarize(canSummarize);
     } catch (e) {
       if (e instanceof Error) {
         setError(e?.message);
       }
+    } finally {
+      setChecking(false);
     }
-  }, [updateModel]);
+  }, []);
 
   useEffect(() => {
     update();
   }, [update]);
-  return { model, error, updateModel };
+  return { error, checking, summarize, canSummarize };
 };

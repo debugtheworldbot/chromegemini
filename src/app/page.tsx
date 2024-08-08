@@ -2,6 +2,7 @@ import ChatBox from "@/components/chatbox";
 import Header from "@/components/header";
 import Aside from "@/components/aside";
 import SideTrigger from "@/components/sideTrigger";
+import SumEntry from "@/components/sumEntry";
 
 export default function Home() {
   return (

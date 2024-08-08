@@ -3,14 +3,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
 import { Link } from "next-view-transitions";
 import InstantDialog from "./instantDialog";
-import { Chrome, Github, CircleHelp, BookOpenText, Coffee } from "lucide-react";
+import { Chrome, Github, CircleHelp, BookOpenText } from "lucide-react";
 import Image from "next/image";
 import { SettingsDialog } from "./settingsDialog";
+import SumEntry from "./sumEntry";
 
 export default function Header() {
   return (
     <header className="sticky px-4 py-2 top-0 bg-white/50 backdrop-blur flex justify-between flex-col sm:flex-row gap-2">
-      <div className="min-w-0 md:ml-16">
+      <Link href="/" className="min-w-0 md:ml-16">
         <Image
           src="/logo.png"
           width={24}
@@ -27,8 +28,9 @@ export default function Header() {
             Chrome AI Test Page, running Gemini Nano locally in your browser.
           </span>
         </p>
-      </div>
+      </Link>
       <div className="flex flex-wrap md:gap-4 gap-2 items-center">
+        <SumEntry />
         <InstantDialog />
         <Link
           className="hidden md:block"
@@ -54,11 +56,6 @@ export default function Header() {
         <Link href="https://discord.gg/ZrF4kjUBhJ" target="_blank">
           <Button size="icon" variant="ghost">
             {discord}
-          </Button>
-        </Link>
-        <Link href="https://buymeacoffee.com/chromeai" target="_blank">
-          <Button size="icon" variant="ghost">
-            <Coffee />
           </Button>
         </Link>
         <Link
