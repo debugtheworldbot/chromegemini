@@ -14,16 +14,15 @@ export default function Page() {
   return (
     <div className="min-h-screen w-screen">
       <Header />
+      <h1 className="text-center text-4xl font-medium mt-8">
+        Summarization by Gemini Nano
+      </h1>
       {checking ? (
         <p className="text-2xl font-medium flex justify-center items-center mt-12">
           <Loader className="animate-spin mr-2" /> Checking your browser...
         </p>
       ) : canSummarize ? (
         <main className="flex h-screen overflow-scroll flex-1 flex-col">
-          <h1 className="text-center text-4xl font-medium mt-8">
-            Summarization by Gemini Nano
-          </h1>
-
           <form
             onSubmit={async (e) => {
               e.preventDefault();
