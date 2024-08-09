@@ -15,7 +15,7 @@ export const historyAtom = atomWithStorage<ChatHistory[]>("ChatHistory", []);
 
 export const currentChatAtom = atomWithStorage<Chat[]>("CurrentChat", []);
 
-export const sideTriggerAtom = atomWithStorage<boolean>("SideTrigger", true);
+export const sideTriggerAtom = atomWithStorage<boolean>("SideTrigger", false);
 
 export const settingsAtom = atomWithStorage<ModelSettings>("Settings", {
   model: "generic",
