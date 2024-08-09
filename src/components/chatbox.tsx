@@ -37,7 +37,7 @@ export default function ChatBox() {
     <div className="w-full flex-1 flex flex-col">
       <ErrorModal error={error} />
       {!isAI ? (
-        <div className="text-center my-auto">
+        <div className="text-center my-auto md:w-[800px]">
           {isAI === null && (
             <p className="text-2xl font-medium flex items-center mb-16">
               <Loader className="animate-spin mr-2" /> Checking your browser...

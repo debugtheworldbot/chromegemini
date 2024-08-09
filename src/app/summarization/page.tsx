@@ -46,7 +46,7 @@ export default function Page() {
         </HoverCard>
       </h1>
       {checking ? (
-        <p className="text-2xl font-medium flex justify-center items-center mt-12">
+        <p className="text-2xl lg:max-w-5xl lg:mx-auto font-medium flex justify-center items-center mt-12">
           <Loader className="animate-spin mr-2" /> Checking your browser...
         </p>
       ) : canSummarize ? (
