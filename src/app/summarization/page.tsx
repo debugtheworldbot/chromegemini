@@ -14,6 +14,7 @@ export default function Page() {
   const { canSummarize, error, checking, summarizeStreaming } = useSummarize();
   const [result, setResult] = useState<string>();
   const [loading, setLoading] = useState(false);
+  const [isStuck, setIsStuck] = useState(false);
 
   return (
     <div className="min-h-screen w-screen">
@@ -28,18 +29,17 @@ export default function Page() {
             <h2 className="text-xl">Caveats</h2>
             <ul className="list-disc text-base font-normal text-left">
               <li>
-                This api is not very stable, if the button is keep loading, try
-                click more times.
+                This api is not stable, if the button is keep loading, try click
+                more times.
               </li>
               <li>Only English input and output are supported.</li>
               <li>
-                No support of any options (e.g. length guidance, style, etc) for
-                the time being.
+                The context window is currently limited to roughly <b>4,000 </b>
+                characters.
               </li>
               <li>
-                The context window is currently limited to 1024 tokens but we
-                use about 26 of those under the hood.
-                <p> 1 token is roughly equal to 4 English characters.</p>
+                No support of any options (e.g. length guidance, style, etc) for
+                the time being.
               </li>
             </ul>
           </HoverCardContent>
@@ -50,7 +50,7 @@ export default function Page() {
           <Loader className="animate-spin mr-2" /> Checking your browser...
         </p>
       ) : canSummarize ? (
-        <main className="overflow-scroll">
+        <main className="overflow-scroll lg:max-w-5xl mt-8 lg:mx-auto mx-6 p-2">
           <form
             onSubmit={async (e) => {
               try {
@@ -58,8 +58,13 @@ export default function Page() {
                 const formData = new FormData(e.currentTarget);
                 const input = formData.get("input") as string;
                 setLoading(true);
+                const timer = setTimeout(() => {
+                  setIsStuck(true);
+                }, 3000);
                 const res = await summarizeStreaming(input);
                 for await (const chunk of res) {
+                  clearTimeout(timer);
+                  setIsStuck(false);
                   setResult(chunk);
                 }
                 setLoading(false);
@@ -67,7 +72,6 @@ export default function Page() {
                 console.log("error", e);
               }
             }}
-            className="lg:max-w-5xl mt-8 lg:mx-auto mx-8"
           >
             <Textarea
               name="input"
@@ -89,9 +93,14 @@ export default function Page() {
                 "Summarize"
               )}
             </Button>
+            {isStuck && loading && (
+              <p className="text-gray-500 text-center mt-2">
+                Still loading? Try Click Again
+              </p>
+            )}
           </form>
           {result && (
-            <div className="mx-12">
+            <div>
               <h2 className="text-2xl font-medium mt-8">Summary</h2>
               <div className="mt-4 text-lg bg-[#f5f5f5] p-4 rounded-xl">
                 {result}
