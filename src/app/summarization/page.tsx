@@ -5,16 +5,16 @@ import { Button } from "@/components/ui/button";
 import { HoverCard, HoverCardContent } from "@/components/ui/hover-card";
 import { Textarea } from "@/components/ui/textarea";
 import { useSummarize } from "@/hooks/use-summarize";
-import { cn } from "@/lib/utils";
 import { HoverCardTrigger } from "@radix-ui/react-hover-card";
 import { BadgeHelp, Loader } from "lucide-react";
 import React, { useState } from "react";
 
+const MAX_MODEL_CHARS = 4000;
 export default function Page() {
-  const { canSummarize, summarize, error, checking } = useSummarize();
+  const { canSummarize, error, checking, summarizeStreaming } = useSummarize();
   const [result, setResult] = useState<string>();
   const [loading, setLoading] = useState(false);
-  const [time, setTime] = useState(0);
+
   return (
     <div className="min-h-screen w-screen">
       <Header />
@@ -27,6 +27,10 @@ export default function Page() {
           <HoverCardContent className="pl-8 md:w-96">
             <h2 className="text-xl">Caveats</h2>
             <ul className="list-disc text-base font-normal text-left">
+              <li>
+                This api is not very stable, if the button is keep loading, try
+                click more times.
+              </li>
               <li>Only English input and output are supported.</li>
               <li>
                 No support of any options (e.g. length guidance, style, etc) for
@@ -49,21 +53,30 @@ export default function Page() {
         <main className="overflow-scroll">
           <form
             onSubmit={async (e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const input = formData.get("input") as string;
-              setLoading(true);
-              const startTime = performance.now();
-              const res = await summarize(input);
-              setTime(performance.now() - startTime);
-              setResult(res);
-              setLoading(false);
+              try {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const input = formData.get("input") as string;
+                setLoading(true);
+                const res = await summarizeStreaming(input);
+                for await (const chunk of res) {
+                  setResult(chunk);
+                }
+                setLoading(false);
+              } catch (e) {
+                console.log("error", e);
+              }
             }}
             className="lg:max-w-5xl mt-8 lg:mx-auto mx-8"
           >
-            <Textarea name="input" rows={10} required />
+            <Textarea
+              name="input"
+              rows={10}
+              maxLength={MAX_MODEL_CHARS}
+              required
+            />
             <Button
-              disabled={loading}
+              // disabled={loading}
               type="submit"
               className="block mx-auto mt-4"
             >
@@ -79,23 +92,7 @@ export default function Page() {
           </form>
           {result && (
             <div className="mx-12">
-              <h2 className="text-2xl font-medium mt-8">
-                Summary
-                {time > 0 && (
-                  <span
-                    className={cn(
-                      time > 5000
-                        ? "text-red-500"
-                        : time > 1000
-                          ? "text-yellow-400"
-                          : "text-green-500",
-                      "ml-2",
-                    )}
-                  >
-                    {time.toFixed(0)} ms
-                  </span>
-                )}
-              </h2>
+              <h2 className="text-2xl font-medium mt-8">Summary</h2>
               <div className="mt-4 text-lg bg-[#f5f5f5] p-4 rounded-xl">
                 {result}
               </div>

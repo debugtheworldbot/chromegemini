@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 export type SummarizeModal = {
   summarize: (input: string) => Promise<string>;
+  summarizeStreaming: (input: string) => Promise<string>;
   destroy: () => Promise<void>;
   ready: Promise<void>;
   addEventListener: (type: string, listener: (event: any) => void) => void;
@@ -36,9 +37,20 @@ export const useSummarize = () => {
   const [error, setError] = useState<null | string>(null);
 
   const summarize = useCallback(async (input: string) => {
-    window.ai.summarizer?.destroy && (await window.ai.summarizer.destroy());
     const summarizer: SummarizeModal = await window.ai.summarizer.create();
+    console.log("i", input);
     const result = await summarizer.summarize(input);
+    console.log("r", result);
+    summarizer.destroy();
+    return result;
+  }, []);
+
+  const summarizeStreaming = useCallback(async (input: string) => {
+    const summarizer: SummarizeModal = await window.ai.summarizer.create();
+    console.log("i", input);
+    const result = await summarizer.summarizeStreaming(input);
+    console.log("r", result);
+    // summarizer.destroy();
     return result;
   }, []);
 
@@ -58,5 +70,5 @@ export const useSummarize = () => {
   useEffect(() => {
     update();
   }, [update]);
-  return { error, checking, summarize, canSummarize };
+  return { error, checking, summarize, canSummarize, summarizeStreaming };
 };
