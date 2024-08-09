@@ -112,7 +112,7 @@ export default function Page() {
           </main>
         ) : (
           <main className="text-2xl p-12 flex flex-col items-center">
-            <p className="text-red-500">Error: {error}</p>
+            <p className="text-red-500">{error}</p>
             <div className="inline-block mt-6">
               Please make sure:
               <ul className="list-disc">

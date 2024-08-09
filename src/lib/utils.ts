@@ -5,6 +5,36 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export async function checkSummarize() {
+  function getChromeVersion() {
+    var raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
+    return raw ? parseInt(raw[2], 10) : 0;
+  }
+
+  const version = getChromeVersion();
+  if (version < 129 && !("ai" in globalThis)) {
+    throw new Error(
+      "Your browser is not supported. Please update to 129 version or greater",
+    );
+  }
+
+  if (!("ai" in globalThis)) {
+    throw new Error(
+      "Prompt API is not available, check your configuration in chrome://flags/#prompt-api-for-gemini-nano",
+    );
+  }
+
+  if (!window.ai.summarizer) {
+    throw new Error("Summarize API is not available");
+  }
+
+  const canSummarize = await window.ai.summarizer.capabilities();
+  const ready = canSummarize.available === "readily";
+  if (!ready) {
+    throw new Error("Summarize AI API is not ready");
+  }
+}
+
 export async function checkEnv() {
   function getChromeVersion() {
     var raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
