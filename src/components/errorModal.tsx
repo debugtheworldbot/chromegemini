@@ -31,7 +31,9 @@ export function ErrorModal({
 
   const checkStatus = async () => {
     setState(null);
-    const state: AIModelAvailability = await window?.ai?.canCreateTextSession();
+    const state: AIModelAvailability = (
+      await window.ai.assistant.capabilities()
+    ).available;
     setState(state);
     if (state === "readily") {
       location.reload();

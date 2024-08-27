@@ -21,7 +21,7 @@ export const useCheckAI = () => {
   const [error, setError] = useState<null | string>(null);
 
   const updateModel = useCallback(async () => {
-    const m = await window.ai.createTextSession({
+    const m = await window.ai.assistant.create({
       topK: settings.topK,
       temperature: settings.temperature,
     });
