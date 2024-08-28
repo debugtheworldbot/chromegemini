@@ -52,12 +52,7 @@ export function IncompatibleBrowserAlert({
             >
               not supported
             </button>
-            . Please switch to Chrome (
-            <Link href="https://www.google.com/chrome/dev/?extra=devchannel">
-              Dev
-            </Link>{" "}
-            or <Link href="https://www.google.com/chrome/canary/">Canary</Link>)
-            version 127 or higher.
+            . Please update to Chrome version 127 or higher.
           </>
         ),
       },

@@ -10,7 +10,6 @@ export const getAiApi = () => {
     create: window.ai.assistant
       ? window.ai.assistant.create.bind(window.ai.assistant)
       : window.ai.createTextSession.bind(window.ai),
-    summarize: window.ai.summarizer,
   };
 };
 

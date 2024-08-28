@@ -38,15 +38,7 @@ export function FlagAccordion({ value, setValue }: FlagAccordionProps) {
       <AccordionItem value="item-3">
         <AccordionTrigger>Supported Browsers</AccordionTrigger>
         <AccordionContent>
-          Please make sure you are using Chrome (
-          <ExternalLink href="https://www.google.com/chrome/dev/?extra=devchannel">
-            Dev
-          </ExternalLink>{" "}
-          /{" "}
-          <ExternalLink href="https://www.google.com/chrome/canary/">
-            Canary
-          </ExternalLink>
-          ) version 127 or higher.
+          Please make sure you are using Chrome version 127 or higher.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-4">
