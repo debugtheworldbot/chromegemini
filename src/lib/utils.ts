@@ -1,9 +1,18 @@
+import { AIModelAvailability } from "@/hooks/use-check-ai";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+export const getAiApi = () => {
+  return {
+    create: window.ai.assistant
+      ? window.ai.assistant.create.bind(window.ai.assistant)
+      : window.ai.createTextSession.bind(window.ai),
+    summarize: window.ai.summarizer,
+  };
+};
 
 export async function checkSummarize() {
   function getChromeVersion() {
@@ -54,9 +63,7 @@ export async function checkEnv() {
     );
   }
 
-  // @ts-expect-error
-  const state: AIModelAvailability = (await ai.assistant.capabilities())
-    .available;
+  const state = await checkAiStatus();
   if (state !== "readily") {
     throw new Error(
       "Built-in AI is not ready, check your configuration in chrome://flags/#optimization-guide-on-device-model",
@@ -64,6 +71,12 @@ export async function checkEnv() {
   }
 }
 
+export const checkAiStatus = async () => {
+  const state: AIModelAvailability = window.ai.assistant
+    ? (await window.ai.assistant.capabilities()).available
+    : await window.ai.canCreateTextSession();
+  return state;
+};
 export const convertTitleToPath = (title: string) => {
   return title.split(" ").join("_");
 };

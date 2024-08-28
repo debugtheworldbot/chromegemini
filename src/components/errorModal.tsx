@@ -13,6 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+import { checkAiStatus } from "@/lib/utils";
 
 export function ErrorModal({
   error,
@@ -31,9 +32,8 @@ export function ErrorModal({
 
   const checkStatus = async () => {
     setState(null);
-    const state: AIModelAvailability = (
-      await window.ai.assistant.capabilities()
-    ).available;
+    const state = await checkAiStatus();
+
     setState(state);
     if (state === "readily") {
       location.reload();

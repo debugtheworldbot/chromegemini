@@ -1,5 +1,5 @@
 import { settingsAtom } from "@/lib/store";
-import { checkEnv } from "@/lib/utils";
+import { checkEnv, getAiApi } from "@/lib/utils";
 import { useAtomValue } from "jotai";
 import { useCallback, useEffect, useState } from "react";
 
@@ -21,7 +21,8 @@ export const useCheckAI = () => {
   const [error, setError] = useState<null | string>(null);
 
   const updateModel = useCallback(async () => {
-    const m = await window.ai.assistant.create({
+    const aiApi = getAiApi();
+    const m = await aiApi.create({
       topK: settings.topK,
       temperature: settings.temperature,
     });
