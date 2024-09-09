@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "Chrome Built-In AI Gemini Nano Test Page",
     images: [
       {
-        url: "https://aqaya8xrbp4jczd0.public.blob.vercel-storage.com/og-image-1200x630%20(1)-sVlNmUM0XYOX7EP81AqvQT3tzCgF8D.jpg",
+        url: "https://assets.chromeai.org/og-image.jpg",
       },
     ],
   },
