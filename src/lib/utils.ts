@@ -7,9 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 export const getAiApi = () => {
   return {
-    create: window.ai.assistant
-      ? window.ai.assistant.create.bind(window.ai.assistant)
-      : window.ai.createTextSession.bind(window.ai),
+    create: window.ai.languageModel.create.bind(window.ai.languageModel),
   };
 };
 
@@ -71,9 +69,16 @@ export async function checkEnv() {
 }
 
 export const checkAiStatus = async () => {
-  const state: AIModelAvailability = window.ai.assistant
-    ? (await window.ai.assistant.capabilities()).available
-    : await window.ai.canCreateTextSession();
+  const state: AIModelAvailability = (
+    await window.ai.languageModel.capabilities()
+  ).available;
+
+  window.ai.languageModel
+    .create()
+    .then(() => {
+      console.log("AI is ready");
+    })
+    .catch(console.error);
   return state;
 };
 export const convertTitleToPath = (title: string) => {
