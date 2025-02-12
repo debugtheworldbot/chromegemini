@@ -90,7 +90,7 @@ export default function InputBar({
             setInputValue("");
             for await (const chunk of aiReplayStream) {
               setChatHistory((h) => {
-                h[h.length - 1].text = chunk;
+                h[h.length - 1].text += chunk;
                 return [...h];
               });
               lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
