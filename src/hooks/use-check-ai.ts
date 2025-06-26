@@ -3,7 +3,7 @@ import { checkEnv, getAiApi } from "@/lib/utils";
 import { useAtomValue } from "jotai";
 import { useCallback, useEffect, useState } from "react";
 
-export type AIModelAvailability = "readily" | "after-download" | "no";
+export type AIModelAvailability = "unavailable" | "downloadable" | "downloading" | "available";
 export type Modal = {
   prompt: any;
   promptStreaming: any;
