@@ -27,6 +27,9 @@ export function ErrorModal({
 	>()
 
 	const [open, setOpen] = useState(!!error)
+	useEffect(() => {
+		setOpen(!!error);
+	}, [error])
 	const [state, setState] = useState<AIModelAvailability | null>(null)
 	const [hasAi, setHasAi] = useState(false)
 

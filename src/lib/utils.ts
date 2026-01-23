@@ -5,9 +5,24 @@ import { twMerge } from 'tailwind-merge'
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
+// Support both new API (window.LanguageModel) and old API (window.ai.languageModel)
+const getLanguageModelApi = () => {
+	if ('LanguageModel' in window && window.LanguageModel) {
+		return window.LanguageModel
+	}
+	if ('ai' in window && window.ai?.languageModel) {
+		return window.ai.languageModel
+	}
+	return null
+}
+
 export const getAiApi = () => {
+	const api = getLanguageModelApi()
+	if (!api) {
+		throw new Error('Language Model API is not available')
+	}
 	return {
-		create: window.LanguageModel.create.bind(window.LanguageModel),
+		create: api.create.bind(api),
 	}
 }
 
@@ -48,20 +63,22 @@ export async function checkEnv() {
 	}
 
 	const version = getChromeVersion()
-	if (version < 127 && !('ai' in globalThis)) {
+	if (version < 127) {
 		throw new Error(
 			'Your browser is not supported. Please update to 127 version or greater.'
 		)
 	}
 
-	if (!('ai' in globalThis)) {
+	const api = getLanguageModelApi()
+	if (!api) {
 		throw new Error(
 			'Prompt API is not available, check your configuration in chrome://flags/#prompt-api-for-gemini-nano'
 		)
 	}
 
 	const state = await checkAiStatus()
-	if (state !== 'available') {
+	// Support both 'available' (new API) and 'readily' (old API)
+	if (state !== 'available' && state !== 'readily') {
 		throw new Error(
 			'Built-in AI is not ready, check your configuration in chrome://flags/#optimization-guide-on-device-model'
 		)
@@ -69,15 +86,19 @@ export async function checkEnv() {
 }
 
 export const checkAiStatus = async () => {
-	const available: AIModelAvailability =
-		await window.LanguageModel.availability()
-
-	window.LanguageModel.create()
-		.then(() => {
-			console.log('AI is ready')
-		})
-		.catch(console.error)
-	return available
+	const api = getLanguageModelApi()
+	if (!api) {
+		return 'unavailable' as AIModelAvailability
+	}
+	// New API uses availability(), old API uses capabilities()
+	if (typeof api.availability === 'function') {
+		return await api.availability()
+	}
+	if (typeof api.capabilities === 'function') {
+		const capabilities = await api.capabilities()
+		return capabilities.available as AIModelAvailability
+	}
+	return 'unavailable' as AIModelAvailability
 }
 export const convertTitleToPath = (title: string) => {
 	return title.split(' ').join('_')

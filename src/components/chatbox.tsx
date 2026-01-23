@@ -15,6 +15,7 @@ import Link from "next/link";
 declare global {
   interface Window {
     ai: any;
+    LanguageModel: any;
   }
 }
 
@@ -49,7 +50,6 @@ export default function ChatBox() {
               <br />
               Check out our
               <ErrorModal
-                error={error}
                 trigger={
                   <p className="font-medium text-primary underline underline-offset-4 mx-2">
                     quick setup guide
